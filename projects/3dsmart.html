@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="3DSmart AI Orchestrator — 5-agent system for automated tender analysis. Built by Kinga Rapacka.">
-  <title>3DSmart AI Orchestrator — Kinga Rapacka</title>
+  <meta name="description" content="3DSmart AI Orchestrator - 5-agent system for automated tender analysis. Built by Kinga Rapacka.">
+  <title>3DSmart AI Orchestrator - Kinga Rapacka</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
     <div class="proj-hero-inner wrap">
       <a href="../index.html#projects" class="proj-back">← All projects</a>
       <div class="proj-meta">
-        <span class="eyebrow light">AI Project · Python · 2025–present</span>
+        <span class="eyebrow light">AI Project · Python · 2025-present</span>
       </div>
       <h1 class="display" style="color:#fff; margin-top:12px; margin-bottom:20px;">
         3DSmart AI<br><em>Orchestrator</em>
@@ -64,21 +64,21 @@
       <!-- Problem -->
       <section class="proj-section reveal">
         <h2>The problem</h2>
-        <p>Tender analysis in the renewable energy sector is slow, expensive, and error-prone. A single procurement dossier can run to hundreds of pages: notices, contract drafts, technical specifications, bill of quantities, opening information. A human expert needs 3–8 hours per tender to check compliance, flag risks, and produce a recommendation. Miss a penalty clause or a conflicting deadline and the consequences are contractual.</p>
-        <p>3DSmart needed this process automated — structured, auditable, fast, and accurate enough for management to act on.</p>
+        <p>Tender analysis in the renewable energy sector is slow, expensive, and error-prone. A single procurement dossier can run to hundreds of pages: notices, contract drafts, technical specifications, bill of quantities, opening information. A human expert needs 3-8 hours per tender to check compliance, flag risks, and produce a recommendation. Miss a penalty clause or a conflicting deadline and the consequences are contractual.</p>
+        <p>3DSmart needed this process automated - structured, auditable, fast, and accurate enough for management to act on.</p>
       </section>
 
       <!-- Pipeline diagram -->
       <section class="proj-section reveal">
-        <h2>Architecture — 5-agent pipeline</h2>
-        <p>Each agent has a single responsibility, a defined personality, operating rules, and a structured JSON output that becomes the next agent's input. The inter-agent contracts are enforced at runtime — no agent proceeds without a complete upstream output.</p>
+        <h2>Architecture - 5-agent pipeline</h2>
+        <p>Each agent has a single responsibility, a defined personality, operating rules, and a structured JSON output that becomes the next agent's input. The inter-agent contracts are enforced at runtime - no agent proceeds without a complete upstream output.</p>
 
         <div class="pipeline-diagram">
           <div class="pd-step">
             <div class="pd-num">1</div>
             <div class="pd-content">
-              <div class="pd-title">DNPA — Data Normalisation &amp; Preparation</div>
-              <div class="pd-desc">Converts raw PDF/DOCX tender documents into structured, unambiguous JSON. Identifies conflicts, marks missing data, standardises formats. Temperature: 0.0 — precision only, no interpretation.</div>
+              <div class="pd-title">DNPA - Data Normalisation &amp; Preparation</div>
+              <div class="pd-desc">Converts raw PDF/DOCX tender documents into structured, unambiguous JSON. Identifies conflicts, marks missing data, standardises formats. Temperature: 0.0 - precision only, no interpretation.</div>
               <div class="pd-output">Output: normalised JSON + conflict log</div>
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="pd-step">
             <div class="pd-num">2</div>
             <div class="pd-content">
-              <div class="pd-title">FEA — Fact Extraction Agent</div>
+              <div class="pd-title">FEA - Fact Extraction Agent</div>
               <div class="pd-desc">Extracts 14 mandatory fact categories (submission deadlines, penalties, warranties, insurance requirements, evaluation criteria…). Every fact carries a source tag. More than 4 NO_DATA → pipeline halts with INPUT_INCOMPLETE.</div>
               <div class="pd-output">Output: 14-category JSON with source tags</div>
             </div>
@@ -96,7 +96,7 @@
             <div class="pd-step">
               <div class="pd-num">3</div>
               <div class="pd-content">
-                <div class="pd-title">CRAA — Compliance &amp; Risk Audit</div>
+                <div class="pd-title">CRAA - Compliance &amp; Risk Audit</div>
                 <div class="pd-desc">Zero-compromise auditor. Scores 14 categories against red flag thresholds. CRITICAL flags cost −20 pts each. Score &lt; 50 → NO-GO. Generates questions to the contracting authority and mitigation actions.</div>
                 <div class="pd-output">Output: compliance table, scoring, red flags, CRAA recommendation</div>
               </div>
@@ -104,7 +104,7 @@
             <div class="pd-step">
               <div class="pd-num">4</div>
               <div class="pd-content">
-                <div class="pd-title">TSFA — Technical Scope &amp; Feasibility</div>
+                <div class="pd-title">TSFA - Technical Scope &amp; Feasibility</div>
                 <div class="pd-desc">Senior site manager persona. Estimates execution time, identifies hidden costs, classifies scope (STANDARD / EXTENDED / COMPLEX), evaluates grid-connection requirements. Uses Code Interpreter for calculations.</div>
                 <div class="pd-output">Output: scope classification, schedule risk, hidden cost estimates</div>
               </div>
@@ -114,7 +114,7 @@
           <div class="pd-step pd-final">
             <div class="pd-num">5</div>
             <div class="pd-content">
-              <div class="pd-title">SOA — Strategic Orchestration Agent</div>
+              <div class="pd-title">SOA - Strategic Orchestration Agent</div>
               <div class="pd-desc">Merges CRAA + TSFA outputs. Checks consistency across all upstream agents. Produces the 6-section Executive Insight Report: tender data → formal scoring → technical assessment → final recommendation → strategy → questions to authority.</div>
               <div class="pd-output">Output: GO / CONDITIONAL / NO-GO · Executive Insight Report (PDF)</div>
             </div>
@@ -155,7 +155,7 @@
           </div>
           <div class="proj-decision">
             <div class="proj-decision-title">JSON interface contracts</div>
-            <p>The 14-key FEA→CRAA contract is enforced at runtime. CRAA validates input completeness before proceeding. This makes the pipeline auditable — every fact carries a source tag referencing the exact document, section, and page number it came from.</p>
+            <p>The 14-key FEA→CRAA contract is enforced at runtime. CRAA validates input completeness before proceeding. This makes the pipeline auditable - every fact carries a source tag referencing the exact document, section, and page number it came from.</p>
           </div>
           <div class="proj-decision">
             <div class="proj-decision-title">Security from the start</div>
@@ -167,7 +167,7 @@
       <!-- What's next -->
       <section class="proj-section reveal">
         <h2>What's next</h2>
-        <p>The immediate bug to fix: <code>extract_text_from_docx</code> is called but not defined — DOCX files currently fail silently. Fix is straightforward. Beyond that: Markdown rendering in PDF export, Power BI dashboard integration, and automatic BZP document retrieval are in the roadmap.</p>
+        <p>The immediate bug to fix: <code>extract_text_from_docx</code> is called but not defined - DOCX files currently fail silently. Fix is straightforward. Beyond that: Markdown rendering in PDF export, Power BI dashboard integration, and automatic BZP document retrieval are in the roadmap.</p>
         <a href="https://colab.research.google.com/drive/1q8c1EPH_uRCiGtnpUp2pq_kkeiVtd-7h#scrollTo=r7tPtZkbXqXY" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">View code on Colab →</a>
       </section>
 
