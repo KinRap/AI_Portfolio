@@ -23,9 +23,9 @@ portfolio/
 
 ## Pages
 
-- **index.html** — hero with animated pipeline card, about strip, projects grid, skills, certifications, contact
-- **about.html** — full profile, background, what I'm looking for
-- **projects/3dsmart.html** — full case study with pipeline diagram, architecture decisions, results
-- **projects/tech-writing.html** — structured authoring portfolio overview
+- **index.html** - hero with animated pipeline card, about strip, projects grid, skills, certifications, contact
+- **about.html** - full profile, background, what I'm looking for
+- **projects/3dsmart.html** - full case study with pipeline diagram, architecture decisions, results
+- **projects/tech-writing.html** - structured authoring portfolio overview
 
 
