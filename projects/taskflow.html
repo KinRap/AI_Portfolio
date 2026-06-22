@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow Agentic Analytics - six-agent LLM pipeline with a deterministic audit layer that benchmarks each agent's accuracy. Built by Kinga Rapacka.">
+  <title>TaskFlow Agentic Analytics - Kinga Rapacka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/project.css">
+</head>
+<body>
+
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">Kinga <span>Rapacka</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#certifications">Certifications</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Project hero -->
+  <header class="proj-hero">
+    <div class="proj-hero-inner wrap">
+      <a href="../index.html#projects" class="proj-back">← All projects</a>
+      <div class="proj-meta">
+        <span class="eyebrow light">AI Project · Python · 2026</span>
+      </div>
+      <h1 class="display" style="color:#fff; margin-top:12px; margin-bottom:20px;">
+        TaskFlow<br><em>Agentic Analytics</em>
+      </h1>
+      <p class="proj-hero-sub">
+        A six-agent LLM pipeline that answers "why is MRR growth slowing?" for a SaaS business. What sets it apart is the measurement: a deterministic SQL audit layer benchmarks each agent's accuracy on recall and precision, instead of judging the system by impression.
+      </p>
+      <div class="proj-hero-tags">
+        <span class="hero-tag">Python</span>
+        <span class="hero-tag">Gemini 2.5 Pro</span>
+        <span class="hero-tag">Multi-agent architecture</span>
+        <span class="hero-tag">Text-to-SQL</span>
+        <span class="hero-tag">SQLite</span>
+        <span class="hero-tag">Evaluation harness</span>
+      </div>
+      <div style="display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;">
+        <a href="https://github.com/KinRap/taskflow-analytics-poc" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="proj-body">
+    <div class="wrap proj-wrap">
+
+      <!-- Problem -->
+      <section class="proj-section reveal">
+        <h2>The problem</h2>
+        <p>Boardroom questions are vague on purpose. "Why is MRR growth slowing?" has no single answer: it could be rising churn, weaker acquisition, downgrades, or a cohort that stopped expanding. Answering it means decomposing the question, writing correct SQL against messy production data, interpreting the result, and turning it into a recommendation a leader can act on.</p>
+        <p>But there is a deeper problem most LLM analytics demos ignore: <strong>can you trust the data, and can you trust the agent?</strong> Real SaaS data is dirty (negative MRR, duplicate invoices, orphaned records, inconsistent formats). An agent that confidently answers on broken data is worse than no agent at all. TaskFlow was built to handle both: produce the analysis, and measure how reliably it does so.</p>
+      </section>
+
+      <!-- Pipeline diagram -->
+      <section class="proj-section reveal">
+        <h2>Architecture - six-agent pipeline</h2>
+        <p>Each agent has a single responsibility, its own temperature, and a structured JSON output that becomes the next agent's input. Running alongside the agents is a deterministic SQL audit layer (plain code, 16 checks) that serves as ground truth for evaluation.</p>
+
+        <div class="pipeline-diagram">
+          <div class="pd-step">
+            <div class="pd-num">1</div>
+            <div class="pd-content">
+              <div class="pd-title">DQA - Data Quality Agent</div>
+              <div class="pd-desc">Audits the data with the suspicion of a good auditor. Triages anomalies by severity, builds a trust report per table and column. Reads raw statistics (min/max, distributions, sample rows), not pre computed answers, so it has to detect issues itself. Temperature 0.15.</div>
+              <div class="pd-output">Output: triage + trust report + discovery</div>
+            </div>
+          </div>
+          <div class="pd-arrow">↓</div>
+          <div class="pd-step">
+            <div class="pd-num">2</div>
+            <div class="pd-content">
+              <div class="pd-title">ANA - Analyst</div>
+              <div class="pd-desc">Decomposes the vague question into 2 to 6 answerable sub-questions. Enforces a churn duet (logo churn and revenue churn as separate metrics) and flags cohort metrics like NRR that require a self join. Does not write SQL. Temperature 0.2.</div>
+              <div class="pd-output">Output: analytical plan + assumptions</div>
+            </div>
+          </div>
+          <div class="pd-arrow">↓ &nbsp; repair loop ↓</div>
+          <div class="pd-parallel">
+            <div class="pd-step">
+              <div class="pd-num">3</div>
+              <div class="pd-content">
+                <div class="pd-title">SQG - SQL Generator</div>
+                <div class="pd-desc">The sole author of SQL. Writes one read-only query per sub-question, returning absolute values alongside ratios so the interpreter knows the scale. Handles recursive month series and self joins for cohort analysis. Temperature 0.0.</div>
+                <div class="pd-output">Output: one SELECT / WITH query</div>
+              </div>
+            </div>
+            <div class="pd-step">
+              <div class="pd-num">4</div>
+              <div class="pd-content">
+                <div class="pd-title">VAL - Validator</div>
+                <div class="pd-desc">A skeptical reviewer that checks SQL before execution. Never writes SQL itself: it reports assertions, and SQG regenerates. Deliberately tuned to be strict, because in a data quality system an over cautious gate is safer than a permissive one. Temperature 0.1.</div>
+                <div class="pd-output">Output: verdict OK / FIX + error assertions</div>
+              </div>
+            </div>
+          </div>
+          <div class="pd-arrow">↓</div>
+          <div class="pd-step">
+            <div class="pd-num">5</div>
+            <div class="pd-content">
+              <div class="pd-title">INT - Interpreter</div>
+              <div class="pd-desc">A data translator, not a strategist. Describes what the numbers show in absolute terms and identifies patterns. Forbidden from stating causes or recommendations: that boundary keeps the diagnosis honest and traceable. Temperature 0.3.</div>
+              <div class="pd-output">Output: observations + pattern + data caveats</div>
+            </div>
+          </div>
+          <div class="pd-arrow">↓</div>
+          <div class="pd-step pd-final">
+            <div class="pd-num">6</div>
+            <div class="pd-content">
+              <div class="pd-title">ADV - Advisor</div>
+              <div class="pd-desc">The only agent allowed to state causes. Diagnoses why, gives exactly one measurable recommendation, and calibrates its confidence to data quality: when the trust report is full of problems, it lowers confidence and recommends fixing the data first.</div>
+              <div class="pd-output">Output: diagnosis + recommendation + confidence</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="proj-section reveal">
+        <h2>Results - measured, not assumed</h2>
+        <p>Because a deterministic audit provides ground truth, the data quality agent can be scored rather than trusted on faith. The numbers below come from live model runs and are reported honestly, including the variance.</p>
+        <div class="proj-results">
+          <div class="proj-result">
+            <div class="proj-result-n">0.64 - 0.86</div>
+            <div class="proj-result-l">DQA recall across runs</div>
+          </div>
+          <div class="proj-result">
+            <div class="proj-result-n">0.82 - 1.00</div>
+            <div class="proj-result-l">DQA precision across runs</div>
+          </div>
+          <div class="proj-result">
+            <div class="proj-result-n">6</div>
+            <div class="proj-result-l">specialised LLM agents</div>
+          </div>
+          <div class="proj-result">
+            <div class="proj-result-n">16</div>
+            <div class="proj-result-l">deterministic audit checks</div>
+          </div>
+        </div>
+        <p style="margin-top:20px;">The full pipeline was confirmed end to end: the validation loop iterates when SQG's query needs fixing, the self join for cohort NRR executes correctly, and the advisor calibrates its confidence to the trust report it receives. A complete audit trace records every agent step.</p>
+      </section>
+
+      <!-- Technical decisions -->
+      <section class="proj-section reveal">
+        <h2>Key technical decisions</h2>
+        <div class="proj-decisions">
+          <div class="proj-decision">
+            <div class="proj-decision-title">A deterministic audit as ground truth</div>
+            <p>The hardest part of evaluating an LLM is knowing the right answer. Here, a plain SQL audit layer computes the real anomalies independently, so the data quality agent's output can be scored on recall and precision against it. This turns "the agent seems good" into "the agent caught 11 of 14 categories with zero false positives".</p>
+          </div>
+          <div class="proj-decision">
+            <div class="proj-decision-title">Single author repair loop</div>
+            <p>Only SQG writes SQL. VAL reviews and reports assertions, SQG regenerates. One author, one reviewer. This avoids the failure mode where two agents fight over the same code, and it makes the repair loop observable in the audit trace.</p>
+          </div>
+          <div class="proj-decision">
+            <div class="proj-decision-title">Honest discovery, not list matching</div>
+            <p>Two anomaly types were deliberately left out of the agent's rules. If it finds them, that is reasoning. In practice the agent reached the concept (activity after churn) but described it as one holistic point rather than two separate measurable detections. The score reflects that honestly: the model has intuition but does not yet operationalize it.</p>
+          </div>
+          <div class="proj-decision">
+            <div class="proj-decision-title">A deliberately strict validator</div>
+            <p>VAL sometimes rejects correct SQL. That was a design choice, not a bug: in a data quality system, an over cautious gate that occasionally asks for a second look is safer than a permissive one that lets a flawed query reach production.</p>
+          </div>
+          <div class="proj-decision">
+            <div class="proj-decision-title">Safety from the start</div>
+            <p>The executor accepts read-only queries only, guarded by a regex that rejects any data modifying statement. The model call has a timeout and retry with backoff, so a hanging connection fails cleanly instead of blocking forever. The API key is read from Colab Secrets, never hardcoded.</p>
+          </div>
+          <div class="proj-decision">
+            <div class="proj-decision-title">Reproducible by design</div>
+            <p>The database is generated from a seeded script, not committed as a binary. A startup cell pulls the generator from this repo and rebuilds the data, so the notebook runs from zero on any machine, for anyone, without local files.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- What's next -->
+      <section class="proj-section reveal">
+        <h2>What's next</h2>
+        <p>The pipeline is built, measured, and documented. Natural next steps: extend the evaluation harness to score the SQL generator and advisor as systematically as the data quality agent, add a results dashboard rendered directly from each run, and migrate the model client to the newer <code>google.genai</code> SDK. The methodology, not just the code, is the deliverable here.</p>
+        <a href="https://github.com/KinRap/taskflow-analytics-poc" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">View code on GitHub →</a>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Kinga Rapacka ·
+      <a href="../index.html">Portfolio</a> ·
+      <a href="https://github.com/KinRap" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
