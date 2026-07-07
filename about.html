@@ -1,638 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Kinga Rapacka - AI Solutions Specialist, PhD, Maths & CS graduate, Python developer.">
-  <title>About - Kinga Rapacka</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: #0d0f14; color: #e8eaf0;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 16px; line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-
-    :root {
-      --bg: #0d0f14; --bg-mid: #13161e; --bg-card: #1a1d27; --border: #252836;
-      --accent: #7c6af7; --accent-2: #4fc3f7;
-      --text: #e8eaf0; --muted: #8b90a0;
-      --ff-display: 'DM Serif Display', serif;
-      --ff-mono: 'JetBrains Mono', monospace;
-      --nav-h: 60px;
-    }
-
-    /* ── NAV ─────────────────────────────────────────────────────────────── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(1.5rem,5vw,4rem); height: var(--nav-h);
-      background: rgba(13,15,20,.92); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: var(--ff-display); font-size: 1.05rem; }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: .875rem; color: var(--muted); transition: color .2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
-    .nav-cta {
-      font-size: .8rem; font-weight: 500;
-      padding: .45rem 1.1rem; border: 1px solid var(--accent);
-      border-radius: 6px; color: var(--accent) !important;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: var(--accent); color: #fff !important; }
-
-    /* ── PROGRESS BAR ───────────────────────────────────────────────────── */
-    #progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      z-index: 200; width: 0%;
-      box-shadow: 0 0 10px rgba(79,195,247,.6);
-      pointer-events: none;
-    }
-
-    /* ── HERO ────────────────────────────────────────────────────────────── */
-    .hero-wrap { position: relative; overflow: hidden; background: var(--bg); }
-
-    #hero-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
-
-    .hero-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(90px); z-index: 0; }
-    .hero-orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,106,247,.13) 0%, transparent 70%);
-      top: -150px; right: -100px;
-      animation: orb1 15s ease-in-out infinite;
-    }
-    .hero-orb-2 {
-      width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(79,195,247,.08) 0%, transparent 70%);
-      bottom: 0; left: 8%;
-      animation: orb2 18s ease-in-out infinite;
-    }
-    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(30px,-40px)} }
-    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-25px)} }
-
-    .hero {
-      position: relative; z-index: 1;
-      min-height: 78vh;
-      display: grid; grid-template-columns: 1fr 400px; gap: 4rem;
-      align-items: center;
-      max-width: 1100px; margin: 0 auto;
-      padding: calc(var(--nav-h) + 4rem) clamp(1.5rem,5vw,4rem) 5rem;
-    }
-
-    .hero-back {
-      display: inline-flex; align-items: center; gap: .4rem;
-      font-size: .8rem; color: var(--muted);
-      transition: color .2s; margin-bottom: 1.5rem;
-    }
-    .hero-back:hover { color: var(--text); }
-
-    .hero-eyebrow {
-      font-size: .75rem; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1rem;
-    }
-
-    .hero h1 {
-      font-family: var(--ff-display);
-      font-size: clamp(2.8rem,6vw,4.6rem);
-      font-weight: 400; line-height: 1.1;
-      color: #fff; margin-bottom: 1.4rem;
-    }
-
-    .g-text {
-      background: linear-gradient(90deg, #c4b8ff, #7c6af7, #4fc3f7, #7c6af7, #c4b8ff);
-      background-size: 300%;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: g-shift 6s ease-in-out infinite;
-      font-style: italic;
-    }
-    @keyframes g-shift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-
-    .hero-sub {
-      font-size: 1.05rem; color: var(--muted);
-      line-height: 1.8; max-width: 520px; margin-bottom: 0;
-    }
-
-    /* ── TERMINAL CARD ───────────────────────────────────────────────────── */
-    .terminal {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px; overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(124,106,247,.1);
-      transition: box-shadow .3s, transform .3s;
-    }
-    .terminal:hover {
-      box-shadow: 0 30px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(124,106,247,.25), 0 0 50px rgba(124,106,247,.07);
-      transform: translateY(-4px);
-    }
-
-    .terminal-bar {
-      background: #0a0c11;
-      padding: .65rem 1rem;
-      display: flex; align-items: center; gap: .4rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
-    .terminal-dot:nth-child(1) { background: #ff5f57; }
-    .terminal-dot:nth-child(2) { background: #febc2e; }
-    .terminal-dot:nth-child(3) { background: #28c840; }
-    .terminal-filename { font-family: var(--ff-mono); font-size: .7rem; color: var(--muted); margin-left: .6rem; }
-
-    .terminal-body { padding: 1.4rem 1.7rem; font-family: var(--ff-mono); font-size: .77rem; line-height: 2.1; }
-    .t-line { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
-    .t-out { padding-left: 1.4rem; }
-    .t-comment { color: #3d4460; }
-    .t-key { color: var(--accent-2); }
-    .t-str { color: #9ce09c; }
-    .t-num { color: #ffb870; }
-    .t-bool { color: #b8a9ff; }
-    .t-punct { color: #4a5068; }
-    .t-prompt { color: var(--accent); }
-    .t-cmd { color: rgba(255,255,255,.85); }
-    .t-gap { height: .35rem; }
-    .t-cursor {
-      display: inline-block; width: 7px; height: 13px;
-      background: var(--accent); vertical-align: text-bottom;
-      animation: blink .9s step-end infinite; margin-left: 1px;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ── PILLARS SECTION ────────────────────────────────────────────────── */
-    .pillars-section {
-      background: var(--bg-mid);
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      padding: 5rem clamp(1.5rem,5vw,4rem);
-    }
-    .pillars-inner { max-width: 1100px; margin: 0 auto; }
-
-    .section-label {
-      font-size: .72rem; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: .8rem;
-    }
-    .section-title {
-      font-family: var(--ff-display);
-      font-size: clamp(1.8rem,3.5vw,2.8rem);
-      font-weight: 400; line-height: 1.2;
-      margin-bottom: .8rem; color: var(--text);
-    }
-    .section-title em { font-style: italic; color: var(--accent); }
-    .section-sub { color: var(--muted); font-size: .95rem; margin-bottom: 2.8rem; max-width: 580px; }
-
-    .pillars-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-
-    .pillar-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 2rem 1.8rem;
-      position: relative; overflow: hidden;
-      transition: border-color .35s, box-shadow .35s, transform .28s;
-    }
-    .pillar-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .5s ease;
-    }
-    .pillar-card:hover::after { transform: scaleX(1); }
-    .pillar-card:hover {
-      border-color: rgba(124,106,247,.5);
-      box-shadow: 0 10px 45px rgba(124,106,247,.14);
-      transform: translateY(-5px);
-    }
-
-    .pillar-num {
-      font-family: var(--ff-display);
-      font-size: 3.4rem; line-height: 1;
-      color: var(--accent);
-      text-shadow: 0 0 30px rgba(124,106,247,.5);
-      margin-bottom: .6rem;
-    }
-    .pillar-name { font-weight: 600; font-size: 1rem; margin-bottom: .5rem; color: var(--text); }
-    .pillar-desc { font-size: .85rem; color: var(--muted); line-height: 1.7; }
-
-    /* ── BODY ────────────────────────────────────────────────────────────── */
-    .about-body { max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem,5vw,4rem); }
-    .about-section { margin-bottom: 5.5rem; }
-
-    .about-section h2 {
-      font-family: var(--ff-display);
-      font-size: clamp(1.6rem,3vw,2.4rem);
-      font-weight: 400; line-height: 1.2;
-      margin-bottom: 1.2rem; color: var(--text);
-    }
-    .about-section h2 em { font-style: italic; color: var(--accent); }
-
-    .about-section p {
-      font-size: .95rem; color: var(--muted);
-      line-height: 1.85; margin-bottom: .9rem; max-width: 720px;
-    }
-    .about-section p strong { color: var(--text); font-weight: 600; }
-
-    /* ── TIMELINE ────────────────────────────────────────────────────────── */
-    .timeline { position: relative; padding-left: 1.75rem; margin-top: 2rem; }
-    .timeline::before {
-      content: ''; position: absolute;
-      left: 0; top: .6rem; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom, var(--accent), var(--accent-2), rgba(79,195,247,0));
-    }
-
-    .tl-item { position: relative; padding-bottom: 2.2rem; }
-    .tl-item:last-child { padding-bottom: 0; }
-
-    .tl-item::before {
-      content: ''; position: absolute;
-      left: calc(-1.75rem - 5px); top: .62rem;
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(124,106,247,.65), 0 0 24px rgba(124,106,247,.2);
-    }
-
-    .tl-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.5rem 1.7rem;
-      transition: border-color .3s, box-shadow .3s, transform .22s;
-    }
-    .tl-card:hover {
-      border-color: rgba(124,106,247,.45);
-      box-shadow: 0 6px 32px rgba(124,106,247,.11);
-      transform: translateX(5px);
-    }
-
-    .tl-date {
-      font-size: .7rem; font-weight: 600;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: .4rem;
-      font-family: var(--ff-mono);
-    }
-    .tl-title { font-weight: 600; font-size: .98rem; margin-bottom: .5rem; color: var(--text); }
-    .tl-desc { font-size: .87rem; color: var(--muted); line-height: 1.75; }
-    .tl-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .85rem; }
-    .tl-tag {
-      font-size: .68rem; font-weight: 500;
-      padding: .2rem .7rem; border-radius: 12px;
-      background: rgba(124,106,247,.1);
-      border: 1px solid rgba(124,106,247,.2);
-      color: #b8a9ff;
-    }
-
-    /* ── CTA ─────────────────────────────────────────────────────────────── */
-    .cta-section {
-      background: var(--bg-mid);
-      border-top: 1px solid var(--border);
-      padding: 5.5rem clamp(1.5rem,5vw,4rem);
-      text-align: center;
-    }
-    .cta-inner { max-width: 640px; margin: 0 auto; }
-    .cta-section h2 {
-      font-family: var(--ff-display);
-      font-size: clamp(1.8rem,3.5vw,2.8rem);
-      font-weight: 400; line-height: 1.2;
-      margin-bottom: 1rem; color: var(--text);
-    }
-    .cta-section h2 em { font-style: italic; color: var(--accent); }
-    .cta-section p { color: var(--muted); font-size: .95rem; line-height: 1.85; margin-bottom: 2.2rem; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    .btn-primary {
-      padding: .75rem 1.8rem; background: var(--accent); color: #fff;
-      border-radius: 8px; font-weight: 600; font-size: .9rem;
-      transition: opacity .2s, transform .15s;
-    }
-    .btn-primary:hover { opacity: .88; transform: translateY(-2px); }
-    .btn-ghost {
-      padding: .75rem 1.8rem; border: 1px solid var(--border);
-      border-radius: 8px; font-size: .9rem; color: var(--muted);
-      transition: border-color .2s, color .2s, transform .15s;
-    }
-    .btn-ghost:hover { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
-
-    /* ── FOOTER ──────────────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center; padding: 2rem;
-      font-size: .78rem; color: var(--muted);
-    }
-    footer a { color: var(--muted); transition: color .2s; }
-    footer a:hover { color: var(--text); }
-
-    /* ── REVEAL ──────────────────────────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-x { opacity: 0; transform: translateX(-16px); transition: opacity .5s ease, transform .5s ease; }
-    .reveal-x.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ──────────────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .terminal { display: none; }
-      .pillars-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Kinga Rapacka · AI Solutions Specialist</title>
+<meta name="description" content="About Kinga Rapacka - AI Solutions Specialist. Doctoral research rigour, years of coding and teaching technology, and intensive AI/ML reskilling converging into one practice.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kinga Rapacka - AI Solutions Specialist">
+<meta property="og:title" content="About - Kinga Rapacka · AI Solutions Specialist">
+<meta property="og:description" content="Doctoral research rigour, years of coding and teaching technology, and intensive AI/ML reskilling converging into one practice.">
+<meta property="og:url" content="https://kinrap.github.io/AI_Portfolio/about.html">
+<meta property="og:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About - Kinga Rapacka · AI Solutions Specialist">
+<meta name="twitter:description" content="Doctoral research rigour, years of coding and teaching technology, and intensive AI/ML reskilling converging into one practice.">
+<meta name="twitter:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="progress-bar"></div>
-
-<nav>
-  <a class="nav-logo" href="index.html">Kinga <span>Rapacka</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html#projects">Projects</a></li>
-    <li><a href="index.html#skills">Skills</a></li>
-    <li><a href="index.html#certifications">Certifications</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
-  </ul>
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">KINGA<em>◆</em>RAPACKA</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#systems">Systems</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#certs">Credentials</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a class="nav-cta" href="index.html#contact">Let's talk</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero-wrap">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
-
-  <div class="hero">
-    <div class="hero-left">
-      <a class="hero-back" href="index.html">← Home</a>
-      <p class="hero-eyebrow">AI Solutions Specialist · Poland</p>
-      <h1>About <em class="g-text">me</em></h1>
-      <p class="hero-sub">I build AI systems that solve real business problems. PhD, 14 years of professional experience, and a working 5-agent orchestration system - before finishing my postgraduate degree in maths and computer science.</p>
-    </div>
-
-    <div class="terminal reveal" data-delay="350">
-      <div class="terminal-bar">
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <span class="terminal-filename">kinga.profile.json</span>
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-kicker"><span class="dot-live"></span>About · Kinga Rapacka</span>
+        <h1>Three threads, <span class="flow">one practice.</span></h1>
+        <p>I came to AI the long way round - through a doctorate and two master's, years of teaching technology at university, and writing code since 2008. Now I build AI systems with the same instinct: make them rigorous, make them measurable, make them make sense.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="index.html#systems">See my systems →</a>
+          <a class="btn btn-ghost" href="assets/Kinga_Rapacka_CV.pdf">Download CV</a>
+        </div>
       </div>
-      <div class="terminal-body">
-        <div class="t-line"><span class="t-comment">// AI Solutions Specialist</span></div>
-        <div class="t-gap"></div>
-        <div class="t-line"><span class="t-key">"name"</span><span class="t-punct">:</span> <span class="t-str">"Kinga Rapacka"</span><span class="t-punct">,</span></div>
-        <div class="t-line"><span class="t-key">"role"</span><span class="t-punct">:</span> <span class="t-str">"AI Systems Builder"</span><span class="t-punct">,</span></div>
-        <div class="t-line"><span class="t-key">"location"</span><span class="t-punct">:</span> <span class="t-str">"Silesia, Poland"</span><span class="t-punct">,</span></div>
-        <div class="t-gap"></div>
-        <div class="t-line"><span class="t-key">"stack"</span><span class="t-punct">: [</span></div>
-        <div class="t-line t-out"><span class="t-str">"Python"</span><span class="t-punct">,</span> <span class="t-str">"Gemini API"</span><span class="t-punct">,</span></div>
-        <div class="t-line t-out"><span class="t-str">"Multi-agent systems"</span></div>
-        <div class="t-line"><span class="t-punct">],</span></div>
-        <div class="t-gap"></div>
-        <div class="t-line"><span class="t-key">"experience"</span><span class="t-punct">:</span> <span class="t-num">14</span><span class="t-punct">,</span> <span class="t-comment">// years</span></div>
-        <div class="t-line"><span class="t-key">"ai_training_h"</span><span class="t-punct">:</span> <span class="t-num">155</span><span class="t-punct">,</span></div>
-        <div class="t-line"><span class="t-key">"live_system"</span><span class="t-punct">:</span> <span class="t-bool">true</span><span class="t-punct">,</span></div>
-        <div class="t-line"><span class="t-key">"response_time"</span><span class="t-punct">:</span> <span class="t-str">"&lt;6 min"</span><span class="t-punct">,</span></div>
-        <div class="t-gap"></div>
-        <div class="t-line"><span class="t-key">"status"</span><span class="t-punct">:</span> <span class="t-str">"open to offers"</span></div>
-        <div class="t-gap"></div>
-        <div class="t-line"><span class="t-prompt">▶</span> <span class="t-cmd">ready<span class="t-cursor"></span></span></div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- THREE PILLARS -->
-<div class="pillars-section">
-  <div class="pillars-inner">
-    <p class="section-label">The differentiators</p>
-    <h2 class="section-title">Why I'm not a <em>typical</em> AI candidate</h2>
-    <p class="section-sub">Most AI candidates are either developers who learned to talk to stakeholders, or business analysts who learned some AI buzzwords. I'm neither.</p>
-
-    <div class="pillars-grid">
-      <div class="pillar-card reveal">
-        <div class="pillar-num">PhD</div>
-        <div class="pillar-name">Research Methodology</div>
-        <p class="pillar-desc">The ability to frame a problem before reaching for a solution, gather evidence systematically, and structure a defensible recommendation. Corpus analysis, structured argumentation - skills that transfer completely.</p>
-      </div>
-      <div class="pillar-card reveal" data-delay="110">
-        <div class="pillar-num" data-count="14" data-display="14y">0y</div>
-        <div class="pillar-name">Stakeholder Mastery</div>
-        <p class="pillar-desc">Explaining a transformer architecture to a board and a business requirement to a developer in the same week. 14 years of professional practice across complex, multi-audience projects.</p>
-      </div>
-      <div class="pillar-card reveal" data-delay="220">
-        <div class="pillar-num">&lt;6min</div>
-        <div class="pillar-name">Live Production System</div>
-        <p class="pillar-desc">A working 5-agent system built for a real company in a real sector - renewable energy procurement - delivering a GO/NO-GO executive report. Built before finishing the postgraduate degree.</p>
+      <div class="conv-card" aria-label="Diagram: three background threads converging into one role">
+        <div class="conv-head">
+          <span class="conv-title">convergence · profile</span>
+          <span class="conv-status"><span class="dot-live"></span>SYNTHESISED</span>
+        </div>
+        <svg id="convSvg" viewBox="0 0 460 300" width="100%" role="img" aria-label="Three input streams - research rigour, communication craft and AI reskilling - merging into one node: AI Solutions Specialist">
+          <defs>
+            <linearGradient id="cwire" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F766E"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient>
+            <filter id="cglow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <path class="cpath" id="cp0" d="M 40 60 C 150 60 180 150 320 150" fill="none" stroke="url(#cwire)" stroke-width="2" stroke-dasharray="5 7" opacity=".8"/>
+          <path class="cpath" id="cp1" d="M 40 150 H 320" fill="none" stroke="url(#cwire)" stroke-width="2" stroke-dasharray="5 7" opacity=".8"/>
+          <path class="cpath" id="cp2" d="M 40 240 C 150 240 180 150 320 150" fill="none" stroke="url(#cwire)" stroke-width="2" stroke-dasharray="5 7" opacity=".8"/>
+          <g font-family="'JetBrains Mono',monospace" text-anchor="start">
+            <g transform="translate(40,60)"><circle r="7" fill="#12262A" stroke="#0F766E" stroke-width="2"/><text x="16" y="-2" fill="#F0F3F2" font-size="10" font-weight="600">Research rigour</text><text x="16" y="12" fill="#6E938E" font-size="8">PhD</text></g>
+            <g transform="translate(40,150)"><circle r="7" fill="#12262A" stroke="#0F766E" stroke-width="2"/><text x="16" y="-2" fill="#F0F3F2" font-size="10" font-weight="600">Tech &amp; teaching</text><text x="16" y="12" fill="#6E938E" font-size="8">code since 2008</text></g>
+            <g transform="translate(40,240)"><circle r="7" fill="#12262A" stroke="#0F766E" stroke-width="2"/><text x="16" y="-2" fill="#F0F3F2" font-size="10" font-weight="600">AI reskilling</text><text x="16" y="12" fill="#6E938E" font-size="8">155h · two live systems</text></g>
+          </g>
+          <g transform="translate(320,150)">
+            <circle r="30" fill="#12262A" stroke="#E4B363" stroke-width="2.5"/>
+            <text text-anchor="middle" y="-2" fill="#F0F3F2" font-family="'JetBrains Mono',monospace" font-size="10" font-weight="600">AI</text>
+            <text text-anchor="middle" y="11" fill="#F0F3F2" font-family="'JetBrains Mono',monospace" font-size="8">SPEC</text>
+          </g>
+          <circle id="cpk0" class="cpacket" r="5" fill="#2DD4BF" filter="url(#cglow)"/>
+          <circle id="cpk1" class="cpacket" r="5" fill="#2DD4BF" filter="url(#cglow)"/>
+          <circle id="cpk2" class="cpacket" r="5" fill="#2DD4BF" filter="url(#cglow)"/>
+        </svg>
+        <div class="conv-cap">→ output: <b>AI Solutions Specialist</b> · rigour + craft + systems</div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
-<!-- BODY -->
-<main class="about-body">
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow rv">The short version</span>
+    <p class="statement rv rv-d1" style="margin-top:22px">I design and build <b>multi-agent AI systems</b> that hold up to scrutiny - with deterministic audit layers instead of guesswork - and I can explain exactly why they work to the people who need to trust them. <b>Technical depth and clear communication</b> rarely live in the same person. They do here.</p>
+  </div>
+</section>
 
-  <!-- WHAT I'VE BUILT -->
-  <div class="about-section reveal">
-    <p class="section-label">Portfolio</p>
-    <h2>What I've <em>built</em></h2>
-    <p>I built a working 5-agent production system in Python for a real company in a real sector, solving a real problem. I did this before finishing my postgraduate degree. I bring <strong>PhD-level research methodology</strong> and <strong>14 years of stakeholder management</strong> - the ability to explain a transformer architecture to a board and a business requirement to a developer in the same week.</p>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-card reveal-x">
-          <div class="tl-date">2025 - present</div>
-          <div class="tl-title">3DSmart AI Orchestrator</div>
-          <p class="tl-desc">5-agent system for automated tender analysis. Python, Gemini 2.5 Pro, inter-agent JSON contracts, ipywidgets UI, automated PDF export. Real domain, real client, real results - GO/NO-GO in under 6 minutes.</p>
-          <div class="tl-tags">
-            <span class="tl-tag">Python</span><span class="tl-tag">Gemini 2.5 Pro</span>
-            <span class="tl-tag">Multi-agent</span><span class="tl-tag">JSON contracts</span><span class="tl-tag">PDF export</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="80">
-          <div class="tl-date">2026 · POC</div>
-          <div class="tl-title">TaskFlow Agentic Analytics</div>
-          <p class="tl-desc">6-agent LLM pipeline that answers "why is MRR growth slowing?" for a SaaS business. What makes it unusual is the measurement layer: a deterministic SQL audit runs alongside the agents and benchmarks each one on recall and precision - so the system's reliability is a number, not an impression. DQA recall 0.79, precision 1.00.</p>
-          <div class="tl-tags">
-            <span class="tl-tag">Python</span><span class="tl-tag">Gemini 2.5 Pro</span>
-            <span class="tl-tag">Text-to-SQL</span><span class="tl-tag">SQLite</span><span class="tl-tag">Evaluation harness</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="160">
-          <div class="tl-date">2024 - 2025</div>
-          <div class="tl-title">LLM Model Evaluation</div>
-          <p class="tl-desc">Evaluated LLM outputs across complex reasoning and instruction-following tasks. Provided structured RLHF feedback. Contributed to production training pipelines.</p>
-          <div class="tl-tags">
-            <span class="tl-tag">RLHF</span><span class="tl-tag">Model alignment</span><span class="tl-tag">Instruction-following</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="240">
-          <div class="tl-date">May 2026 - present</div>
-          <div class="tl-title">LLM Model Evaluation</div>
-          <p class="tl-desc">Multi-domain model output evaluation. Quality assessment, alignment criteria, edge case identification across diverse project types.</p>
-          <div class="tl-tags">
-            <span class="tl-tag">Quality assessment</span><span class="tl-tag">Edge case analysis</span><span class="tl-tag">Model alignment</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="320">
-          <div class="tl-date">2023 - present</div>
-          <div class="tl-title">Technical Writing Portfolio</div>
-          <p class="tl-desc">DITA structured authoring, MadCap Flare projects, prompt design strategies, Simplified English. Built and published. Proves I can document as precisely as I can build.</p>
-          <div class="tl-tags">
-            <span class="tl-tag">DITA</span><span class="tl-tag">MadCap Flare</span><span class="tl-tag">Oxygen XML</span><span class="tl-tag">Prompt design</span>
-          </div>
-        </div>
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow rv">Why AI</span>
+    <div class="story">
+      <p class="lead-line rv rv-d1">AI caught me during my technical-communication studies, on a project about using it with the tools we had at the time.</p>
+      <p class="rv rv-d1">Building that project, I ran straight into both the walls and the open doors - the real limits of the tools, and possibilities I hadn't expected. That was the moment it stopped being a subject I was studying and became something I couldn't put down. I got pulled in, and I started learning how to use AI <b>properly</b> - not as a gimmick, but as part of how I work every day. I can't picture working without it now.</p>
+      <p class="rv rv-d1">What keeps me here was never blind enthusiasm. My analytical mind refuses to take AI on faith: it argues with the output, verifies it, pushes back - and at the same time goes looking for the non-obvious connections, the uses nobody wrote into the manual. That tension between <b>skepticism and experimentation</b> is the whole point, and it's why my systems carry audit layers instead of assumptions.</p>
+      <p class="rv rv-d1">Every course and certification pulled me deeper and gave me more room to experiment, until the experiments turned into projects that actually worked - and changed how I think about agents entirely. I keep investing in myself and testing the edges, but I build for the other side of the screen too: <b>practical systems that make real work easier for real people</b>. I know this field never stands still, and that's exactly what I like about it.</p>
+      <p class="story-close rv rv-d1">The research years - a doctorate and two master's - taught me to be skeptical and to verify before I believe. In AI, that isn't baggage, it's the edge.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow rv">What I bring</span>
+    <h2 class="rv rv-d1">Three threads, woven together</h2>
+    <p class="lead rv rv-d2">None of these on its own is rare. The combination is - and it's exactly what AI implementation actually demands.</p>
+    <div class="threads">
+      <article class="thread rv">
+        <span class="thread-no">THREAD 01</span>
+        <h3>Research rigour</h3>
+        <p>A doctorate and two master's - in theology (Biblical Studies) and in media education and journalism - trained me to work with evidence, not vibes: close reading, source criticism, structured argumentation. It's the same discipline I now apply to LLM evaluation, alignment work and measuring whether a system actually does what it claims.</p>
+        <div class="tw-tags"><span class="tw-tag">PhD + 2 master's</span><span class="tw-tag">Evaluation</span><span class="tw-tag">Evidence</span></div>
+      </article>
+      <article class="thread rv rv-d1">
+        <span class="thread-no">THREAD 02</span>
+        <h3>Teaching &amp; building tech</h3>
+        <p>I've been writing code since 2008 - HTML, CSS and onward - and I taught technology at university: computer graphics, software, text editing, and designing training programmes around new tools. Making technology usable, and teaching people to use it, has been my work for years. That's now the layer between an AI system and the business that has to rely on it.</p>
+        <div class="tw-tags"><span class="tw-tag">Coding since 2008</span><span class="tw-tag">University instructor</span><span class="tw-tag">Training design</span></div>
+      </article>
+      <article class="thread rv rv-d2">
+        <span class="thread-no">THREAD 03</span>
+        <h3>AI systems</h3>
+        <p>155+ hours of accredited AI/ML training, a postgraduate degree in maths and computer science, and two live multi-agent systems built end-to-end. Not certificates on a shelf - working pipelines with measured recall, precision and real outputs.</p>
+        <div class="tw-tags"><span class="tw-tag">Multi-agent</span><span class="tw-tag">Prompt engineering</span><span class="tw-tag">Python · Gemini</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section approach">
+  <div class="wrap">
+    <span class="eyebrow rv">How I work</span>
+    <h2 class="rv rv-d1">Principles, not slogans</h2>
+    <p class="lead rv rv-d2">The way I build AI comes straight from the research and teaching years - and it shows in the systems.</p>
+    <div class="principles">
+      <div class="principle rv"><span class="p-no">01</span><h3>Measured, not imagined</h3><p>If a system claims to be reliable, I want the number. My pipelines carry deterministic audit layers that score each step on recall and precision - so "it works" is a metric, not an opinion.</p></div>
+      <div class="principle rv rv-d1"><span class="p-no">02</span><h3>Built to be trusted</h3><p>An AI system is only useful if the people around it understand and believe it. I design the explanation alongside the system - confidence calibrated to data quality, red flags surfaced, decisions traceable.</p></div>
+      <div class="principle rv"><span class="p-no">03</span><h3>Sequential, end-to-end</h3><p>I work section by section, page by page, system by system - real constraints, real data, real outputs. No slideware. Everything I show has actually run.</p></div>
+      <div class="principle rv rv-d1"><span class="p-no">04</span><h3>Fluent in both worlds</h3><p>I move between the technical and the business layer without losing either. That's where AI implementation usually breaks - and where I'm most useful.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section path">
+  <div class="wrap">
+    <span class="eyebrow rv">The path</span>
+    <h2 class="rv rv-d1">How the threads came together</h2>
+    <p class="lead rv rv-d2">Not a straight line - a deliberate convergence.</p>
+    <div class="cert-list">
+      <div class="cert rv"><span class="cert-year">MA · MA</span><b>Two master's - Theology (Biblical Studies) &amp; Media Education and Journalism</b><span>Cardinal Stefan Wyszyński University (UKSW) - working with complex source material, media and audiences.</span></div>
+      <div class="cert rv"><span class="cert-year">PhD</span><b>Doctorate</b><span>Cardinal Stefan Wyszyński University, Warsaw - research methodology, structured argumentation, evidence-based method.</span></div>
+      <div class="cert rv"><span class="cert-year">since 2008</span><b>Writing code &amp; teaching technology</b><span>HTML, CSS and onward since 2008. University instructor at UKSW - computer graphics, software, text editing, and training design with new technologies.</span></div>
+      <div class="cert rv"><span class="cert-year">2023-2024</span><b>Postgraduate - Technical Communication</b><span>Structured authoring, DITA, prompt design for documentation - where AI first caught me.</span></div>
+      <div class="cert rv"><span class="cert-year">2024-2026</span><b>Intensive AI/ML reskilling · 155h+</b><span>Founderz × Microsoft, EIT Deep Tech, Google × SGH, Santander Open Academy (MIT / IE), DeepLearning.AI - generative AI, agents, data science.</span></div>
+      <div class="cert rv"><span class="cert-year">2025-2026</span><b>Two live multi-agent systems</b><span>TaskFlow (6-agent measured analytics) and 3DSmart (5-agent tender analysis) - built, measured, running.</span></div>
+      <div class="cert rv"><span class="cert-year">July 2026</span><b>Postgraduate - Mathematics &amp; Computer Science</b><span>WSKZ - formalising the foundations under the practical work.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow rv">Where I'm headed</span>
+    <h2 class="rv rv-d1">What I want to build next</h2>
+    <div class="prose rv rv-d2" style="margin-top:18px">
+      <p>I'm looking for a role where I can own AI systems end-to-end - and especially the part most projects underestimate: the layer where a model has to become something a business can actually trust, understand and use.</p>
+      <p>The work I want more of: multi-agent systems with real audit layers, LLM evaluation done properly, and messy business problems turned into AI that measurably helps the people doing the work. I'm drawn to teams that ship, that measure what they build, and that treat AI as engineering rather than magic.</p>
+    </div>
+    <div class="pill-row rv rv-d2">
+      <span class="pill">Multi-agent systems</span><span class="pill">LLM evaluation</span><span class="pill">AI implementation</span><span class="pill">Measured, auditable AI</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta rv">
+      <h2>Building something real?</h2>
+      <p>Open to mid-level AI roles - AI Solutions Specialist, AI Business Analyst, AI Implementation Consultant. Silesia · Kraków · Warsaw · Remote.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="index.html#contact">Get in touch →</a>
+        <a class="btn btn-ghost" href="index.html#systems">See the systems</a>
       </div>
     </div>
   </div>
-
-  <!-- EDUCATION -->
-  <div class="about-section reveal">
-    <p class="section-label">Background</p>
-    <h2>Education &amp; <em>training</em></h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-card reveal-x">
-          <div class="tl-date">2025 - July 2026</div>
-          <div class="tl-title">Postgraduate Degree - Mathematics &amp; Computer Science</div>
-          <p class="tl-desc">Wyższa Szkoła Kształcenia Zawodowego. Formal STEM foundations to complement the practical AI work. Graduating July 2026.</p>
-          <div class="tl-tags"><span class="tl-tag">Mathematics</span><span class="tl-tag">CS fundamentals</span></div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="80">
-          <div class="tl-date">2023 - 2024</div>
-          <div class="tl-title">Postgraduate Degree - Technical Communication</div>
-          <p class="tl-desc">Vistula Academy of Finance and Business. Structured authoring, documentation systems, information architecture.</p>
-          <div class="tl-tags"><span class="tl-tag">Structured authoring</span><span class="tl-tag">Information architecture</span></div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-card reveal-x" data-delay="160">
-          <div class="tl-date">2010 - 2015</div>
-          <div class="tl-title">PhD - Biblical Studies</div>
-          <p class="tl-desc">Cardinal Stefan Wyszyński University, Warsaw. Research methodology, corpus analysis, structured argumentation. The skills transfer completely: frame the problem, gather evidence, make the case.</p>
-          <div class="tl-tags"><span class="tl-tag">Research methodology</span><span class="tl-tag">Corpus analysis</span><span class="tl-tag">Structured argumentation</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<!-- CTA -->
-<div class="cta-section">
-  <div class="cta-inner reveal">
-    <p class="section-label">Open to work</p>
-    <h2>Looking for <em>something real</em></h2>
-    <p>Mid-level AI roles - AI Solutions Specialist, AI Business Analyst, AI Implementation Consultant. I'm not looking for a junior position. I have a working production system, real LLM evaluation experience, and the analytical rigour to run a project from problem statement to deployed solution.<br><br>Silesia · Kraków · Warsaw · Remote · UoP or B2B</p>
-    <div class="cta-btns">
-      <a href="index.html#contact" class="btn-primary">Get in touch →</a>
-      <a href="assets/Kinga_Rapacka_CV.pdf" class="btn-ghost" download>Download CV</a>
-    </div>
-  </div>
-</div>
+</section>
 
 <footer>
-  © 2026 Kinga Rapacka · AI Solutions Specialist ·
-  <a href="index.html">Portfolio</a> ·
-  <a href="https://github.com/KinRap" target="_blank" rel="noopener">GitHub</a>
+  <div class="wrap">© 2026 Kinga Rapacka · AI Solutions Specialist · <a href="index.html">Home</a> · <a href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio</a> · <a href="https://github.com/KinRap">GitHub</a></div>
 </footer>
 
 <script>
-  // ── Progress bar ─────────────────────────────────────────────────────────
-  const progressBar = document.getElementById('progress-bar');
-  const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    if (progressBar && max > 0) progressBar.style.width = (window.scrollY / max * 100) + '%';
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── Scroll reveal ────────────────────────────────────────────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const delay = +(e.target.dataset.delay || 0);
-        setTimeout(() => e.target.classList.add('visible'), delay);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  /* nav */
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+  burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.classList.remove('open');}});
 
-  document.querySelectorAll('.reveal, .reveal-x').forEach(el => observer.observe(el));
+  /* reveal */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 
-  // ── Neural network canvas ────────────────────────────────────────────────
-  const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let W, H, nodes = [];
-
-    const resize = () => { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; };
-    const makeNodes = () => {
-      nodes = Array.from({ length: 58 }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
-        r: Math.random() * 1.5 + 0.4,
-      }));
-    };
-    const tick = () => {
-      ctx.clearRect(0, 0, W, H);
-      const DIST = 140;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < DIST) {
-            ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(124,106,247,${(1 - d / DIST) * 0.2})`; ctx.lineWidth = 0.5; ctx.stroke();
-          }
-        }
-      }
-      nodes.forEach(n => {
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(124,106,247,0.55)'; ctx.fill();
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
-      });
-      requestAnimationFrame(tick);
-    };
-
-    window.addEventListener('resize', () => { resize(); makeNodes(); }, { passive: true });
-    resize(); makeNodes(); tick();
+  /* convergence packets - three streams flowing into the merge node */
+  var paths=[document.getElementById('cp0'),document.getElementById('cp1'),document.getElementById('cp2')];
+  var pks=[document.getElementById('cpk0'),document.getElementById('cpk1'),document.getElementById('cpk2')];
+  var lens=paths.map(function(p){return p?p.getTotalLength():0;});
+  var offsets=[0,0.33,0.66],CDUR=4200,ct0=null,craf=null,cvisible=true;
+  function cframe(now){
+    if(!ct0)ct0=now;
+    for(var i=0;i<paths.length;i++){
+      if(!paths[i]||!pks[i])continue;
+      var t=(((now-ct0)/CDUR)+offsets[i])%1;
+      var pt=paths[i].getPointAtLength(t*lens[i]);
+      pks[i].setAttribute('cx',pt.x);pks[i].setAttribute('cy',pt.y);
+      pks[i].setAttribute('opacity',(t>0.9?(1-t)*10:1).toFixed(2));
+    }
+    craf=requestAnimationFrame(cframe);
   }
-
-  // ── Count-up for pillar "14y" ────────────────────────────────────────────
-  document.querySelectorAll('.pillar-num[data-count]').forEach(el => {
-    const target = parseInt(el.dataset.count, 10);
-    const display = el.dataset.display || String(target);
-    if (!target) return;
-    const suffix = display.replace(/\d+/, '');
-    const obs = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      obs.disconnect();
-      const t0 = performance.now();
-      const run = (now) => {
-        const p = Math.min((now - t0) / 1200, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased) + suffix;
-        if (p < 1) requestAnimationFrame(run); else el.textContent = display;
-      };
-      requestAnimationFrame(run);
-    }, { threshold: 0.5 });
-    obs.observe(el);
-  });
+  function cstart(){if(!craf&&cvisible&&!reduce)craf=requestAnimationFrame(cframe);}
+  function cstop(){if(craf){cancelAnimationFrame(craf);craf=null;}}
+  if(reduce){
+    for(var i=0;i<paths.length;i++){if(paths[i]&&pks[i]){var pt=paths[i].getPointAtLength(lens[i]);pks[i].setAttribute('cx',pt.x);pks[i].setAttribute('cy',pt.y);}}
+  }else{cstart();}
+  var hero=document.getElementById('top');
+  if(hero){var cio=new IntersectionObserver(function(es){cvisible=es[0].isIntersecting;if(cvisible)cstart();else cstop();},{threshold:0});cio.observe(hero);}
+  document.addEventListener('visibilitychange',function(){if(document.hidden)cstop();else cstart();});
+})();
 </script>
 </body>
 </html>
