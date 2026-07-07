@@ -1,664 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kinga Rapacka - AI Solutions Specialist. Multi-agent AI systems, prompt engineering, LLM evaluation. Based in Silesia, Poland." />
-  <title>Kinga Rapacka - AI Solutions Specialist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0d0f14; --bg-mid: #13161e; --bg-card: #1a1d27; --border: #252836;
-      --accent: #7c6af7; --accent-2: #4fc3f7; --text: #e8eaf0; --muted: #8b90a0;
-      --tag-bg: #1e2130; --radius: 10px;
-      --ff-display: 'Fraunces', serif; --ff-body: 'Inter', sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
-
-    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.5rem,5vw,4rem); height: 60px; background: rgba(13,15,20,.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-family: var(--ff-display); font-weight: 600; font-size: 1.05rem; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: .875rem; color: var(--muted); transition: color .2s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta { font-size: .8rem; font-weight: 500; padding: .45rem 1.1rem; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); transition: background .2s, color .2s; }
-    .nav-cta:hover { background: var(--accent); color: #fff; }
-
-    .hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem); max-width: 1100px; margin: 0 auto; }
-    .hero-eyebrow { font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-    .hero h1 { font-family: var(--ff-display); font-size: clamp(2.6rem,6vw,5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.8rem; }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-sub { font-size: clamp(1rem,2vw,1.2rem); color: var(--muted); max-width: 640px; margin-bottom: 2.8rem; line-height: 1.75; }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 3rem; }
-    .tag { font-size: .76rem; font-weight: 500; padding: .3rem .8rem; border-radius: 20px; background: var(--tag-bg); border: 1px solid var(--border); color: var(--muted); }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { padding: .75rem 1.8rem; background: var(--accent); color: #fff; border-radius: 8px; font-weight: 600; font-size: .9rem; transition: opacity .2s; }
-    .btn-primary:hover { opacity: .88; }
-    .btn-ghost { padding: .75rem 1.8rem; border: 1px solid var(--border); border-radius: 8px; font-size: .9rem; color: var(--muted); transition: border-color .2s, color .2s; }
-    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
-
-    .full-bleed-divider { background: var(--bg-mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .stats-inner { max-width: 1100px; margin: 0 auto; padding: 2.2rem clamp(1.5rem,5vw,4rem); display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 2rem; }
-    .stat-item { text-align: center; }
-    .stat-num { font-family: var(--ff-display); font-size: 2.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
-    .stat-label { font-size: .78rem; color: var(--muted); margin-top: .4rem; text-transform: uppercase; letter-spacing: .06em; }
-
-    section { max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem,5vw,4rem); }
-    .section-label { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-    .section-title { font-family: var(--ff-display); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
-    .section-title em { font-style: italic; color: var(--accent); }
-    .section-sub { color: var(--muted); max-width: 600px; margin-bottom: 3rem; font-size: 1rem; }
-
-    /* Pipeline */
-    .pipeline { background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 2.5rem; margin-bottom: 4rem; overflow-x: auto; }
-    .pipeline-title { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
-    .pipeline-steps { display: flex; align-items: stretch; gap: 0; min-width: max-content; }
-    .pl-step { display: flex; flex-direction: column; align-items: center; min-width: 130px; }
-    .pl-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: .8rem 1rem; text-align: center; width: 120px; }
-    .pl-num { font-size: .7rem; color: var(--accent); font-weight: 600; margin-bottom: .3rem; }
-    .pl-name { font-size: .78rem; font-weight: 500; color: var(--text); line-height: 1.3; }
-    .pl-sub { font-size: .68rem; color: var(--muted); margin-top: .25rem; }
-    .pl-arrow { display: flex; align-items: center; padding: 0 .3rem; color: var(--border); font-size: 1.2rem; align-self: center; }
-
-    /* Projects */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1.5rem; }
-    .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; transition: border-color .25s, transform .25s; }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .card-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-    .card-title { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 600; line-height: 1.3; }
-    .card-desc { font-size: .9rem; color: var(--muted); line-height: 1.65; flex: 1; }
-    .card-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .card-tag { font-size: .7rem; padding: .2rem .6rem; background: var(--tag-bg); border: 1px solid var(--border); border-radius: 12px; color: var(--muted); }
-    .card-link { font-size: .82rem; font-weight: 500; color: var(--accent); display: inline-flex; align-items: center; gap: .3rem; margin-top: .3rem; transition: gap .2s; }
-    .card-link:hover { gap: .6rem; }
-    .project-card.featured { grid-column: 1/-1; flex-direction: row; gap: 2.5rem; align-items: flex-start; }
-    .featured-content { flex: 1; }
-    .featured-meta { min-width: 200px; display: flex; flex-direction: column; gap: .8rem; }
-    .meta-item { font-size: .78rem; color: var(--muted); }
-    .meta-item strong { display: block; color: var(--text); margin-bottom: .15rem; }
-
-    /* Skills */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.2rem; }
-    .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
-    .skill-icon { font-size: 1.5rem; margin-bottom: .6rem; }
-    .skill-name { font-weight: 600; font-size: .95rem; margin-bottom: .4rem; }
-    .skill-desc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
-    .skill-level { display: inline-block; margin-top: .8rem; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-
-    /* Certifications - FULL GRID */
-    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 1rem; }
-    .cert-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; transition: border-color .2s; }
-    .cert-card:hover { border-color: var(--accent); }
-    .cert-card.cert-featured { border-color: rgba(124,106,247,.35); background: linear-gradient(135deg,rgba(124,106,247,.07) 0%,var(--bg-card) 100%); }
-    .cert-year { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
-    .cert-name { font-size: .9rem; font-weight: 600; color: var(--text); line-height: 1.35; margin-bottom: .3rem; }
-    .cert-issuer { font-size: .75rem; color: var(--muted); line-height: 1.45; }
-
-    /* Contact */
-    .contact-box { background: var(--bg-mid); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem; text-align: center; }
-    .contact-box h2 { font-family: var(--ff-display); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 300; margin-bottom: 1rem; }
-    .contact-box h2 em { font-style: italic; color: var(--accent); }
-    .contact-box p { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
-    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
-    .contact-link { padding: .65rem 1.4rem; border: 1px solid var(--border); border-radius: 8px; font-size: .85rem; color: var(--muted); transition: border-color .2s, color .2s; }
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
-    .contact-link.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
-    .contact-link.primary:hover { opacity: .88; color: #fff; }
-
-    /* TW Bridge */
-    .bridge { background: linear-gradient(135deg,rgba(79,195,247,.07) 0%,rgba(124,106,247,.07) 100%); border: 1px solid rgba(79,195,247,.2); border-radius: var(--radius); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-    .bridge-text h3 { font-family: var(--ff-display); font-size: 1.4rem; font-weight: 300; margin-bottom: .5rem; }
-    .bridge-text h3 em { font-style: italic; color: var(--accent-2); }
-    .bridge-text p { font-size: .9rem; color: var(--muted); max-width: 480px; }
-    .bridge-btn { padding: .75rem 1.6rem; border: 1px solid var(--accent-2); border-radius: 8px; color: var(--accent-2); font-size: .85rem; font-weight: 500; white-space: nowrap; transition: background .2s, color .2s; }
-    .bridge-btn:hover { background: var(--accent-2); color: var(--bg); }
-
-    footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; font-size: .78rem; color: var(--muted); }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--text); }
-
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .project-card.featured { flex-direction: column; }
-      .featured-meta { min-width: auto; flex-direction: row; flex-wrap: wrap; }
-      .bridge { flex-direction: column; text-align: center; }
-    }
-
-    /* ===== VISUAL ENHANCEMENT LAYER ===== */
-
-    #progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: linear-gradient(90deg, #7c6af7, #4fc3f7);
-      z-index: 200; width: 0%;
-      box-shadow: 0 0 10px rgba(79,195,247,0.6);
-      pointer-events: none;
-    }
-
-    .hero-wrap { position: relative; overflow: hidden; }
-    .hero { position: relative; z-index: 1; }
-
-    #hero-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
-
-    .hero-orb {
-      position: absolute; border-radius: 50%;
-      pointer-events: none; filter: blur(90px); z-index: 0;
-    }
-    .hero-orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,106,247,0.13) 0%, transparent 70%);
-      top: -150px; right: -100px;
-      animation: orb1 15s ease-in-out infinite;
-    }
-    .hero-orb-2 {
-      width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(79,195,247,0.09) 0%, transparent 70%);
-      bottom: 0; left: 5%;
-      animation: orb2 19s ease-in-out infinite;
-    }
-    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(30px,-40px)} }
-    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-25px)} }
-
-    .g-text {
-      background: linear-gradient(90deg, #c4b8ff, #7c6af7, #4fc3f7, #7c6af7, #c4b8ff);
-      background-size: 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: g-shift 6s ease-in-out infinite;
-      font-style: italic;
-    }
-    @keyframes g-shift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-
-    .stat-num {
-      text-shadow: 0 0 30px rgba(124,106,247,0.55), 0 0 60px rgba(124,106,247,0.2);
-    }
-
-    .pl-box { transition: border-color .45s, background .45s, box-shadow .45s; }
-    .pl-box.active {
-      border-color: rgba(124,106,247,.8) !important;
-      background: rgba(124,106,247,.12) !important;
-      box-shadow: 0 0 22px rgba(124,106,247,.3), inset 0 0 14px rgba(124,106,247,.06);
-    }
-    .pl-box.active .pl-num { color: #c4b8ff; text-shadow: 0 0 12px rgba(124,106,247,.9); }
-    .pl-box.active .pl-name { color: #e8eaf0; }
-
-    .pl-arrow { animation: arrow-pulse 2s ease-in-out infinite; }
-    @keyframes arrow-pulse { 0%,100%{color:rgba(79,195,247,.25)} 50%{color:rgba(79,195,247,.9)} }
-
-    .project-card:hover {
-      border-color: rgba(124,106,247,.55) !important;
-      box-shadow: 0 0 0 1px rgba(124,106,247,.18), 0 10px 45px rgba(124,106,247,.14), 0 24px 64px rgba(0,0,0,.45) !important;
-      transform: translateY(-5px) !important;
-    }
-
-    .skill-card { position: relative; overflow: hidden; }
-    .skill-card::after {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, #7c6af7, #4fc3f7);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .4s ease;
-    }
-    .skill-card:hover::after { transform: scaleX(1); }
-    .skill-card:hover {
-      border-color: rgba(124,106,247,.45);
-      box-shadow: 0 4px 32px rgba(124,106,247,.14);
-      transform: translateY(-3px);
-    }
-
-    .cert-card { transition: border-color .25s, box-shadow .25s, transform .22s !important; }
-    .cert-card:hover {
-      box-shadow: 0 4px 20px rgba(124,106,247,.12) !important;
-      transform: translateY(-2px) !important;
-    }
-
-    .bridge { transition: border-color .3s, box-shadow .3s !important; }
-    .bridge:hover {
-      border-color: rgba(79,195,247,.5) !important;
-      box-shadow: 0 0 50px rgba(79,195,247,.09) !important;
-    }
-
-    .contact-box {
-      box-shadow: 0 0 80px rgba(124,106,247,.07), inset 0 1px 0 rgba(255,255,255,.03) !important;
-    }
-
-    .tag { transition: border-color .2s, color .2s, background .2s; }
-    .tag:hover { border-color: rgba(124,106,247,.5); color: #c4b8ff; background: rgba(124,106,247,.08); }
-
-    .nav-links a.active { color: var(--text) !important; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinga Rapacka - AI Solutions Specialist</title>
+<meta name="description" content="Kinga Rapacka - AI Solutions Specialist. Multi-agent AI systems, prompt engineering, LLM evaluation. Based in Silesia, Poland.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kinga Rapacka - AI Solutions Specialist">
+<meta property="og:title" content="Kinga Rapacka - AI Solutions Specialist">
+<meta property="og:description" content="Multi-agent AI systems, prompt engineering and LLM evaluation. Two live agent pipelines, 155h+ accredited AI/ML training, PhD-level research rigour. Based in Silesia, Poland.">
+<meta property="og:url" content="https://kinrap.github.io/AI_Portfolio/">
+<meta property="og:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kinga Rapacka - AI Solutions Specialist">
+<meta name="twitter:description" content="Multi-agent AI systems, prompt engineering and LLM evaluation. Two live agent pipelines, 155h+ accredited AI/ML training, PhD-level research rigour. Based in Silesia, Poland.">
+<meta name="twitter:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="progress-bar"></div>
-
-<nav>
-  <span class="nav-logo">Kinga Rapacka</span>
-  <ul class="nav-links">
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <a class="nav-cta" href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio →</a>
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top">KINGA<em>◆</em>RAPACKA</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Credentials</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a class="nav-cta" href="#contact">Let's talk</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero-wrap">
-<canvas id="hero-canvas"></canvas>
-<div class="hero-orb hero-orb-1"></div>
-<div class="hero-orb hero-orb-2"></div>
-<div class="hero">
-  <p class="hero-eyebrow">AI Solutions Specialist · Silesia, Poland</p>
-  <h1>I build <em class="g-text">AI systems</em><br>that solve real problems.</h1>
-  <p class="hero-sub">Agentic architectures, prompt engineering for production systems, and the business layer of AI implementation - where the real leverage is. PhD · 155h accredited AI/ML training · Maths &amp; CS graduate 2026.</p>
-  <div class="hero-tags">
-    <span class="tag">Multi-agent systems</span>
-    <span class="tag">Prompt engineering</span>
-    <span class="tag">LLM evaluation</span>
-    <span class="tag">Python · Gemini API</span>
-    <span class="tag">AI implementation</span>
+<header class="hero" id="top">
+  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-kicker"><span class="dot-live"></span>AI Solutions Specialist · Silesia, Poland</span>
+        <h1>I orchestrate <span class="flow">AI&nbsp;agents</span> that solve real business problems.</h1>
+        <p>Multi-agent architectures, production prompt engineering and the business layer of AI implementation - where the real leverage is. PhD · 155h accredited AI/ML training · Maths &amp; CS graduate 2026.</p>
+        <div class="hero-tags">
+          <span class="tag">Multi-agent systems</span>
+          <span class="tag">Prompt engineering</span>
+          <span class="tag">LLM evaluation</span>
+          <span class="tag">Python · Gemini API</span>
+          <span class="tag">AI implementation</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#systems">See the systems ↓</a>
+          <a class="btn btn-ghost" href="assets/Kinga_Rapacka_CV.pdf">Download CV</a>
+        </div>
+      </div>
+
+      <div class="pipe-card" aria-label="Live agent pipeline animation">
+        <div class="pipe-head">
+          <span class="pipe-title">taskflow · agent chain</span>
+          <span class="pipe-status"><span class="dot-live"></span>RUNNING</span>
+        </div>
+        <svg id="pipeSvg" viewBox="0 0 460 300" width="100%" role="img" aria-label="Animated diagram: six AI agents passing data along a pipeline">
+          <defs>
+            <linearGradient id="wire" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#14B8A6"/><stop offset="1" stop-color="#E4B363"/>
+            </linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <path id="pipePath" d="M 60 60 H 230 Q 260 60 260 90 V 120 Q 260 150 230 150 H 90 Q 60 150 60 180 V 210 Q 60 240 90 240 H 400"
+                fill="none" stroke="url(#wire)" stroke-width="2.5" stroke-dasharray="6 7" opacity=".85"/>
+          <g id="nodes" font-family="'JetBrains Mono',monospace" text-anchor="middle">
+            <g class="node" transform="translate(60,60)"><circle r="24" fill="#12262A" stroke="#14B8A6" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">DQA</text><text y="42" fill="#6E938E" font-size="8">DATA QUALITY</text></g>
+            <g class="node" transform="translate(230,60)"><circle r="24" fill="#12262A" stroke="#14B8A6" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">ANA</text><text y="42" fill="#6E938E" font-size="8">ANALYST</text></g>
+            <g class="node" transform="translate(230,150)"><circle r="24" fill="#12262A" stroke="#14B8A6" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">SQG</text><text y="42" fill="#6E938E" font-size="8">SQL GEN</text></g>
+            <g class="node" transform="translate(90,150)"><circle r="24" fill="#12262A" stroke="#14B8A6" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">VAL</text><text y="42" fill="#6E938E" font-size="8">VALIDATOR</text></g>
+            <g class="node" transform="translate(90,240)"><circle r="24" fill="#12262A" stroke="#14B8A6" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">INT</text><text y="42" fill="#6E938E" font-size="8">INTERPRETER</text></g>
+            <g class="node" transform="translate(400,240)"><circle r="24" fill="#12262A" stroke="#E4B363" stroke-width="2"/><text y="4" fill="#F0F3F2" font-size="11" font-weight="600">ADV</text><text y="42" fill="#6E938E" font-size="8">ADVISOR</text></g>
+          </g>
+          <circle id="packet" r="6" fill="#2DD4BF" filter="url(#glow)"/>
+        </svg>
+        <div class="pipe-log" id="pipeLog">→ <b>DQA</b> · trust report: recall 0.79 · precision 1.00</div>
+      </div>
+    </div>
+
+    <div class="hero-stats rv">
+      <div class="stat"><b><span class="count" data-to="6">0</span><span class="u">+5</span></b><span>AI agents in two live pipelines</span></div>
+      <div class="stat"><b>&lt;<span class="count" data-to="6">0</span> <span class="u">min</span></b><span>to a GO/NO-GO report</span></div>
+      <div class="stat"><b><span class="count" data-to="155">0</span><span class="u">h</span></b><span>accredited AI/ML training</span></div>
+      <div class="stat"><b>PhD</b><span>research methodology</span></div>
+    </div>
   </div>
-  <div class="hero-btns">
-    <a class="btn-primary" href="#projects">See my work ↓</a>
-    <a class="btn-ghost" href="assets/Kinga_Rapacka_CV.pdf" target="_blank">Download CV</a>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Multi-agent orchestration</span><span>Prompt engineering</span><span>LLM evaluation</span><span>Text-to-SQL audit</span><span>GO/NO-GO in &lt;6 min</span><span>DITA &amp; structured authoring</span>
+    <span>Multi-agent orchestration</span><span>Prompt engineering</span><span>LLM evaluation</span><span>Text-to-SQL audit</span><span>GO/NO-GO in &lt;6 min</span><span>DITA &amp; structured authoring</span>
   </div>
 </div>
-</div><!-- /hero-wrap -->
 
-<!-- STATS -->
-<div class="full-bleed-divider">
-  <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num" data-count="5" data-display="5">5</div><div class="stat-label">AI agents<br>in pipeline</div></div>
-    <div class="stat-item"><div class="stat-num">&lt;6</div><div class="stat-label">minutes to<br>GO/NO-GO</div></div>
-    <div class="stat-item"><div class="stat-num" data-count="155" data-display="155">155</div><div class="stat-label">accredited<br>AI/ML hours</div></div>
-    <div class="stat-item"><div class="stat-num">PhD</div><div class="stat-label">research<br>methodology</div></div>
-  </div>
-</div>
+<section class="section" id="systems">
+  <div class="wrap">
+    <span class="eyebrow rv">Flagship systems</span>
+    <h2 class="rv rv-d1">Two live agent pipelines. <span class="accent">Measured, not imagined.</span></h2>
+    <p class="lead rv rv-d2">Both systems run end-to-end on real documents and real data - with deterministic audit layers instead of vibes.</p>
 
-<!-- PIPELINE -->
-<section>
-  <p class="section-label">Live system</p>
-  <h2 class="section-title">TaskFlow Agentic Analytics - <em>measured pipeline</em></h2>
-  <p class="section-sub">6-agent LLM system answering "why is MRR growth slowing?" for a SaaS business. A deterministic SQL audit layer benchmarks each agent's accuracy on recall and precision, instead of judging the system by impression.</p>
+    <div class="sys">
+      <article class="sys-card rv">
+        <span class="sys-badge"><span class="dot-live"></span>Live system</span>
+        <h3>TaskFlow Agentic Analytics</h3>
+        <p>A 6-agent LLM pipeline that answers <em>"why is MRR growth slowing?"</em> for a SaaS business. A deterministic SQL audit layer scores each agent on recall and precision - the data quality agent hits recall 0.79 / precision 1.00. Includes a self-repair loop and confidence calibrated to data quality.</p>
+        <div class="mini-pipe">
+          <span class="mini-node">DQA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">ANA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">SQG</span><span class="mini-arrow">→</span>
+          <span class="mini-node">VAL</span><span class="mini-arrow">→</span>
+          <span class="mini-node">INT</span><span class="mini-arrow">→</span>
+          <span class="mini-node">ADV</span>
+        </div>
+        <div class="sys-meta">
+          <div><b>Type</b>Measured AI system</div>
+          <div><b>Domain</b>SaaS analytics · data quality</div>
+          <div><b>Stack</b>Python · Gemini API · SQLite</div>
+          <div><b>Output</b>Recommendation + metrics</div>
+        </div>
+        <a class="sys-link" href="projects/taskflow.html">Read the case study <span class="arr">→</span></a>
+      </article>
 
-  <div class="pipeline">
-    <div class="pipeline-title">TaskFlow - agent chain</div>
-    <div class="pipeline-steps">
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">1</div><div class="pl-name">DQA</div><div class="pl-sub">Data Quality · Trust report</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">2</div><div class="pl-name">ANA</div><div class="pl-sub">Analyst · Question decomposition</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">3</div><div class="pl-name">SQG</div><div class="pl-sub">SQL Generator · Read-only</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">4</div><div class="pl-name">VAL</div><div class="pl-sub">Validator · Repair loop</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">5</div><div class="pl-name">INT</div><div class="pl-sub">Interpreter · Pattern only</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">6</div><div class="pl-name">ADV</div><div class="pl-sub">Advisor · Diagnosis + confidence</div></div></div>
-    </div>
-  </div>
-
-  <p class="section-label">Live system</p>
-  <h2 class="section-title">3DSmart AI Orchestrator - <em>live pipeline</em></h2>
-  <p class="section-sub">5-agent system automating tender analysis in renewable energy. Processes procurement documents end-to-end and delivers a GO/NO-GO executive report in under 6 minutes.</p>
-
-  <div class="pipeline">
-    <div class="pipeline-title">3DSmart AI Orchestrator - agent chain</div>
-    <div class="pipeline-steps">
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">1</div><div class="pl-name">DNPA</div><div class="pl-sub">Data Normalisation</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">2</div><div class="pl-name">FEA</div><div class="pl-sub">Fact Extraction · 14-cat JSON</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">3</div><div class="pl-name">CRAA</div><div class="pl-sub">Compliance Audit · Red flags</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">4</div><div class="pl-name">TSFA</div><div class="pl-sub">Technical Feasibility</div></div></div>
-      <div class="pl-arrow">→</div>
-      <div class="pl-step"><div class="pl-box"><div class="pl-num">5</div><div class="pl-name">SOA</div><div class="pl-sub">Strategic Synthesis · GO/NO-GO</div></div></div>
-    </div>
-  </div>
-
-  <!-- PROJECTS -->
-  <p class="section-label" id="projects">Work</p>
-  <h2 class="section-title">Projects &amp; <em>portfolio</em></h2>
-  <p class="section-sub">From agentic AI systems to technical documentation - all built with real constraints, real domains, and real outputs.</p>
-
-  <div class="projects-grid">
-    <div class="project-card featured reveal">
-      <div class="featured-content">
-        <p class="card-eyebrow">AI Project · Python · TaskFlow</p>
-        <h3 class="card-title">TaskFlow Agentic Analytics</h3>
-        <p class="card-desc">Six-agent LLM pipeline that answers "why is MRR growth slowing?" for a SaaS business. What sets it apart is the deterministic SQL audit layer that benchmarks each agent's accuracy: the data quality agent is scored on recall 0.79 and precision 1.00, not judged by impression. Includes a single-author repair loop, confidence calibrated to data quality, and a full end to end audit trace.</p>
-        <div class="card-tags"><span class="card-tag">Python</span><span class="card-tag">Gemini 2.5 Pro</span><span class="card-tag">Multi-agent</span><span class="card-tag">Text-to-SQL</span><span class="card-tag">Evaluation</span></div>
-        <a class="card-link" href="projects/taskflow.html">Read case study →</a>
-      </div>
-      <div class="featured-meta">
-        <div class="meta-item"><strong>Type</strong>Measured AI system</div>
-        <div class="meta-item"><strong>Domain</strong>SaaS analytics · data quality</div>
-        <div class="meta-item"><strong>Stack</strong>Python · Gemini API · SQLite</div>
-        <div class="meta-item"><strong>Output</strong>Strategic recommendation + metrics</div>
-      </div>
-    </div>
-
-    <div class="project-card featured reveal">
-      <div class="featured-content">
-        <p class="card-eyebrow">AI Project · Python · 3DSmart</p>
-        <h3 class="card-title">3DSmart AI Orchestrator</h3>
-        <p class="card-desc">5-agent system that automates tender analysis in the renewable energy sector. Processes procurement documents end-to-end and delivers a GO/NO-GO executive report in under 6 minutes. Includes a 14-category JSON interface contract and scoring formula with red-flag triggers.</p>
-        <div class="card-tags"><span class="card-tag">Python</span><span class="card-tag">Gemini 2.5 Pro</span><span class="card-tag">Multi-agent</span><span class="card-tag">JSON contracts</span></div>
-        <a class="card-link" href="projects/3dsmart.html">Read case study →</a>
-      </div>
-      <div class="featured-meta">
-        <div class="meta-item"><strong>Type</strong>Agentic AI system</div>
-        <div class="meta-item"><strong>Domain</strong>Renewable energy · procurement</div>
-        <div class="meta-item"><strong>Stack</strong>Python · Gemini API · GPT</div>
-        <div class="meta-item"><strong>Output</strong>GO/NO-GO executive report</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <p class="card-eyebrow">LLM Evaluation · Contract</p>
-      <h3 class="card-title">LLM Model Evaluation</h3>
-      <p class="card-desc">LLM evaluation across complex reasoning tasks, multi-domain projects, and RLHF feedback pipelines. Hands-on experience with model alignment and instruction-following assessment.</p>
-      <div class="card-tags"><span class="card-tag">RLHF</span><span class="card-tag">Model alignment</span><span class="card-tag">Instruction-following</span></div>
-    </div>
-
-    <div class="project-card reveal">
-      <p class="card-eyebrow">In progress · Data Analysis</p>
-      <h3 class="card-title">Public Dataset Analysis - BZP / GUS</h3>
-      <p class="card-desc">Data analysis project using Python, pandas and matplotlib on Polish public procurement or education statistics data. Full write-up with findings, visualisations, and documented methodology.</p>
-      <div class="card-tags"><span class="card-tag">Python</span><span class="card-tag">pandas</span><span class="card-tag">matplotlib</span><span class="card-tag">Jupyter</span></div>
-      <span style="font-size:.75rem;color:var(--muted);">📊 Coming July 2026</span>
-    </div>
-
-    <div class="project-card reveal">
-      <p class="card-eyebrow">Technical Writing · Documentation</p>
-      <h3 class="card-title">Documentation Portfolio</h3>
-      <p class="card-desc">Structured authoring in DITA and XML, prompt design strategies for technical writers, Simplified English, MadCap Flare projects, and Generative AI applied to documentation workflows.</p>
-      <div class="card-tags"><span class="card-tag">DITA</span><span class="card-tag">MadCap Flare</span><span class="card-tag">Oxygen XML</span><span class="card-tag">Prompt design</span></div>
-      <a class="card-link" href="projects/tech-writing.html">View portfolio →</a>
+      <article class="sys-card rv rv-d1">
+        <span class="sys-badge"><span class="dot-live"></span>Live system</span>
+        <h3>3DSmart AI Orchestrator</h3>
+        <p>A 5-agent system that automates tender analysis in renewable energy. It processes procurement documents end-to-end and delivers a GO/NO-GO executive report in under 6 minutes - with a 14-category JSON interface contract and red-flag scoring.</p>
+        <div class="mini-pipe">
+          <span class="mini-node">DNPA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">FEA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">CRAA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">TSFA</span><span class="mini-arrow">→</span>
+          <span class="mini-node">SOA</span>
+        </div>
+        <div class="sys-meta">
+          <div><b>Type</b>Agentic AI system</div>
+          <div><b>Domain</b>Renewables · procurement</div>
+          <div><b>Stack</b>Python · Gemini API · GPT</div>
+          <div><b>Output</b>GO/NO-GO executive report</div>
+        </div>
+        <a class="sys-link" href="projects/3dsmart.html">Read the case study <span class="arr">→</span></a>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<div class="full-bleed-divider">
-<section id="skills">
-  <p class="section-label">Capabilities</p>
-  <h2 class="section-title">Skills &amp; <em>tools</em></h2>
-  <p class="section-sub">A rare combination of technical depth and communication expertise - built over two years of intensive AI work and 14 years of professional practice.</p>
-  <div class="skills-grid">
-    <div class="skill-card"><div class="skill-icon">🤖</div><div class="skill-name">Generative AI &amp; Agents</div><div class="skill-desc">Multi-agent architectures, prompt engineering, LLM orchestration, AI ethics &amp; risk, agent guardrails, AI implementation planning.</div><span class="skill-level">Expert</span></div>
-    <div class="skill-card"><div class="skill-icon">🔬</div><div class="skill-name">LLM Evaluation &amp; Alignment</div><div class="skill-desc">RLHF feedback pipelines, instruction-following assessment, edge case identification, model output quality analysis.</div><span class="skill-level">Practitioner</span></div>
-    <div class="skill-card"><div class="skill-icon">🐍</div><div class="skill-name">Python &amp; Dev Tools</div><div class="skill-desc">Gemini API, ipywidgets, FPDF, Google Colab, Jupyter Notebook, GitHub, VS Code. Building real, working systems - not just scripts.</div><span class="skill-level">Intermediate</span></div>
-    <div class="skill-card"><div class="skill-icon">📊</div><div class="skill-name">Data &amp; BI</div><div class="skill-desc">Advanced Excel (matrix functions, Power Query, pivot tables), Power BI, data visualisation, data analysis, Introduction to Data Science (MIT).</div><span class="skill-level">Intermediate</span></div>
-    <div class="skill-card"><div class="skill-icon">📝</div><div class="skill-name">Technical Documentation</div><div class="skill-desc">HTML, XML, CSS, Markdown, DITA, Oxygen XML, MadCap Flare, Just The Docs, Confluence, Snagit. Expert-level structured authoring.</div><span class="skill-level">Expert</span></div>
-    <div class="skill-card"><div class="skill-icon">🎯</div><div class="skill-name">Project &amp; Stakeholder Mgmt</div><div class="skill-desc">Scrum / Agile, Jira, stakeholder management, project coordination, grant management. 14 years translating complexity for diverse audiences.</div><span class="skill-level">Expert</span></div>
-  </div>
-</section>
-</div>
-
-<!-- CERTIFICATIONS - FULL LIST -->
-<section id="certifications">
-  <p class="section-label">Credentials</p>
-  <h2 class="section-title">Education &amp; <em>certifications</em></h2>
-  <p class="section-sub">155+ hours of accredited AI/ML training, postgraduate degree in mathematics and computer science, and a PhD.</p>
-
-  <div class="certs-grid">
-
-    <div class="cert-card cert-featured">
-      <div class="cert-year">2026 · 105h</div>
-      <div class="cert-name">AI Skills 4 Women</div>
-      <div class="cert-issuer">Founderz AI Business School × Microsoft</div>
+<section class="section projects-band" id="projects">
+  <div class="wrap">
+    <span class="eyebrow rv">More work</span>
+    <h2 class="rv rv-d1">Projects &amp; portfolio</h2>
+    <p class="lead rv rv-d2">Built with real constraints, real domains and real outputs - from LLM evaluation to structured documentation.</p>
+    <div class="proj-grid">
+      <article class="proj rv">
+        <span class="proj-cat">LLM Evaluation · Contract</span>
+        <h3>LLM Model Evaluation</h3>
+        <div class="mviz" aria-hidden="true">
+          <span class="mviz-tag"><i></i>scoring</span>
+          <div class="eqbars"><b></b><b></b><b></b><b></b><b></b><b></b></div>
+        </div>
+        <p>Evaluation across complex reasoning tasks, multi-domain projects and RLHF feedback pipelines. Hands-on model alignment and instruction-following assessment.</p>
+        <div class="chip-row"><span class="chip">RLHF</span><span class="chip">Alignment</span><span class="chip">Instruction-following</span></div>
+      </article>
+      <article class="proj rv rv-d1">
+        <span class="proj-cat">Data Analysis · In progress</span>
+        <h3>Public Dataset Analysis - BZP / GUS</h3>
+        <div class="mviz" aria-hidden="true">
+          <span class="mviz-tag"><i></i>plotting</span>
+          <svg class="spark" viewBox="0 0 300 44" preserveAspectRatio="none">
+            <path class="area" d="M0 40 L0 34 L40 30 L80 36 L120 20 L160 26 L200 12 L240 18 L300 6 L300 44 L0 44 Z"/>
+            <path class="line" d="M0 34 L40 30 L80 36 L120 20 L160 26 L200 12 L240 18 L300 6"/>
+            <circle cx="300" cy="6" r="3"/>
+          </svg>
+        </div>
+        <p>Python, pandas and matplotlib on Polish public procurement and education statistics. Full write-up with findings, visualisations and documented methodology.</p>
+        <div class="chip-row"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">matplotlib</span><span class="chip">Jupyter</span></div>
+        <span class="soon">📊 Coming July 2026</span>
+      </article>
+      <article class="proj rv rv-d2">
+        <span class="proj-cat">Technical Writing</span>
+        <h3>Documentation Portfolio</h3>
+        <div class="mviz" aria-hidden="true">
+          <span class="mviz-tag"><i></i>authoring</span>
+          <div class="wlines"><i></i><i></i><i></i></div>
+          <span class="wcaret"></span>
+        </div>
+        <p>Structured authoring in DITA and XML, prompt design for technical writers, Simplified English, MadCap Flare and GenAI applied to documentation workflows.</p>
+        <div class="chip-row"><span class="chip">DITA</span><span class="chip">MadCap Flare</span><span class="chip">Oxygen XML</span><span class="chip">Prompt design</span></div>
+        <a class="sys-link" href="projects/tech-writing.html">View portfolio <span class="arr">→</span></a>
+      </article>
     </div>
-
-    <div class="cert-card cert-featured">
-      <div class="cert-year">2026 · 50h</div>
-      <div class="cert-name">AIDEAS - AI &amp; Machine Learning</div>
-      <div class="cert-issuer">Generator Pomysłów × Politechnika Wrocławska (EIT Deep Tech)</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2025-26</div>
-      <div class="cert-name">Postgraduate Degree - Mathematics &amp; Computer Science</div>
-      <div class="cert-issuer">WSKZ · graduating July 2026</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2025 · 5 weeks</div>
-      <div class="cert-name">Using AI in Business Development</div>
-      <div class="cert-issuer">Google Umiejętności Jutra AI × SGH · 5 modules · 19 courses</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2025 · 6h</div>
-      <div class="cert-name">Introduction to Data Science</div>
-      <div class="cert-issuer">Santander Open Academy / IE University</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024 · 8h</div>
-      <div class="cert-name">Generative AI</div>
-      <div class="cert-issuer">Santander Open Academy / MIT Professional Education</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024 · 8h</div>
-      <div class="cert-name">Google: AI and Productivity</div>
-      <div class="cert-issuer">Santander Open Academy · content by Google</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024</div>
-      <div class="cert-name">Google AI Essentials</div>
-      <div class="cert-issuer">Coursera</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024 · 8h</div>
-      <div class="cert-name">Effective Business Writing</div>
-      <div class="cert-issuer">Santander Open Academy</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024 · 8h</div>
-      <div class="cert-name">Scrum Basics - Agile Project Management</div>
-      <div class="cert-issuer">Santander Open Academy</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2024</div>
-      <div class="cert-name">AI for Everyone</div>
-      <div class="cert-issuer">Coursera / DeepLearning.AI</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2026</div>
-      <div class="cert-name">Excel Foundations &amp; Advanced</div>
-      <div class="cert-issuer">Santander Open Academy</div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-year">2010-2015</div>
-      <div class="cert-name">PhD - Biblical Studies</div>
-      <div class="cert-issuer">Cardinal Stefan Wyszyński University, Warsaw · research methodology, corpus analysis, structured argumentation</div>
-    </div>
-
-  </div>
-
-  <p style="margin-top:1.5rem;font-size:.8rem;color:var(--muted);">
-    Full list with verification links on <a href="https://www.linkedin.com/in/kinga-rapacka-29315a2a3" style="color:var(--accent);">LinkedIn</a> and <a href="https://github.com/KinRap" style="color:var(--accent);">GitHub</a>.
-  </p>
-</section>
-
-<!-- TW BRIDGE -->
-<section>
-  <div class="bridge reveal">
-    <div class="bridge-text">
-      <h3>Also an expert <em>technical writer</em> - not just an AI builder.</h3>
-      <p>DITA, MadCap Flare, structured authoring, prompt design for documentation workflows. The same precision that makes AI systems reliable makes documentation excellent.</p>
-    </div>
-    <a class="bridge-btn" href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio →</a>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-box reveal">
-    <h2>Let's talk if you're building <em>something real.</em></h2>
-    <p>Open to mid-level AI roles - AI Solutions Specialist, AI Business Analyst, AI Implementation Consultant.<br>Silesia · Kraków · Warsaw · Remote.</p>
-    <div class="contact-links">
-      <a class="contact-link primary" href="mailto:kinga.klosek@gmail.com">✉ kinga.klosek@gmail.com</a>
-      <a class="contact-link" href="https://www.linkedin.com/in/kinga-rapacka-29315a2a3" target="_blank">LinkedIn</a>
-      <a class="contact-link" href="https://github.com/KinRap" target="_blank">GitHub</a>
-      <a class="contact-link" href="assets/Kinga_Rapacka_CV.pdf" target="_blank">Download CV</a>
+<section class="section" id="skills">
+  <div class="wrap">
+    <span class="eyebrow rv">Capabilities</span>
+    <h2 class="rv rv-d1">Skills &amp; <span class="accent">tools</span></h2>
+    <p class="lead rv rv-d2">A rare combination of technical depth and communication - intensive AI work built on top of years of coding, teaching technology, and academic research.</p>
+    <div class="skill-grid">
+      <div class="skill rv" style="--w:95%"><div class="skill-top"><span class="skill-icon">🤖</span><span class="lvl lvl-expert">Expert</span></div><h3>Generative AI &amp; Agents</h3><p>Multi-agent architectures, prompt engineering, LLM orchestration, AI ethics &amp; risk, agent guardrails, implementation planning.</p><div class="meter"><i></i></div></div>
+      <div class="skill rv rv-d1" style="--w:78%"><div class="skill-top"><span class="skill-icon">🔬</span><span class="lvl lvl-prac">Practitioner</span></div><h3>LLM Evaluation &amp; Alignment</h3><p>RLHF feedback pipelines, instruction-following assessment, edge-case identification, output quality analysis.</p><div class="meter"><i></i></div></div>
+      <div class="skill rv rv-d2" style="--w:62%"><div class="skill-top"><span class="skill-icon">🐍</span><span class="lvl lvl-mid">Intermediate</span></div><h3>Python &amp; Dev Tools</h3><p>Gemini API, ipywidgets, FPDF, Colab, Jupyter, GitHub, VS Code. Real, working systems - not just scripts.</p><div class="meter"><i></i></div></div>
+      <div class="skill rv" style="--w:62%"><div class="skill-top"><span class="skill-icon">📊</span><span class="lvl lvl-mid">Intermediate</span></div><h3>Data &amp; BI</h3><p>Advanced Excel (matrix functions, Power Query, pivots), Power BI, data visualisation, Intro to Data Science (MIT).</p><div class="meter"><i></i></div></div>
+      <div class="skill rv rv-d1" style="--w:95%"><div class="skill-top"><span class="skill-icon">📝</span><span class="lvl lvl-expert">Expert</span></div><h3>Technical Documentation</h3><p>HTML, XML, CSS, Markdown, DITA, Oxygen XML, MadCap Flare, Confluence, Snagit. Expert-level structured authoring.</p><div class="meter"><i></i></div></div>
+      <div class="skill rv rv-d2" style="--w:95%"><div class="skill-top"><span class="skill-icon">🎯</span><span class="lvl lvl-expert">Expert</span></div><h3>Project &amp; Stakeholder Mgmt</h3><p>Scrum/Agile, Jira, stakeholder management, grant management. Years of teaching, journalism and research translating complexity for diverse audiences.</p><div class="meter"><i></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section certs" id="certs">
+  <div class="wrap">
+    <span class="eyebrow rv">Credentials</span>
+    <h2 class="rv rv-d1">Education &amp; certifications</h2>
+    <p class="lead rv rv-d2">155+ hours of accredited AI/ML training, a postgraduate degree in mathematics and computer science, and a PhD.</p>
+    <div class="cert-list">
+      <div class="cert rv"><span class="cert-year">2026 · 105h</span><b>AI Skills 4 Women</b><span>Founderz AI Business School × Microsoft</span></div>
+      <div class="cert rv"><span class="cert-year">2026 · 50h</span><b>AIDEAS - AI &amp; Machine Learning</b><span>Generator Pomysłów × Politechnika Wrocławska (EIT Deep Tech)</span></div>
+      <div class="cert rv"><span class="cert-year">2025-26</span><b>Postgraduate - Mathematics &amp; Computer Science</b><span>WSKZ · graduating July 2026</span></div>
+      <div class="cert rv"><span class="cert-year">2025 · 5 weeks</span><b>Using AI in Business Development</b><span>Google Umiejętności Jutra AI × SGH · 5 modules · 19 courses</span></div>
+      <div class="cert rv"><span class="cert-year">2024-26</span><b>Santander Open Academy track</b><span>Generative AI (MIT PE) · Intro to Data Science (IE) · AI &amp; Productivity (Google) · Business Writing · Scrum · Excel Advanced</span></div>
+      <div class="cert rv"><span class="cert-year">2024</span><b>Google AI Essentials · AI for Everyone</b><span>Coursera · DeepLearning.AI</span></div>
+      <div class="cert rv"><span class="cert-year">PhD</span><b>Doctorate - Biblical Studies</b><span>Cardinal Stefan Wyszyński University, Warsaw · research methodology, structured argumentation</span></div>
+      <div class="cert rv"><span class="cert-year">MA · MA</span><b>Two master's - Theology (Biblical Studies) &amp; Media Education and Journalism</b><span>Cardinal Stefan Wyszyński University, Warsaw</span></div>
+      <div class="cert rv"><span class="cert-year">since 2008</span><b>Coding &amp; teaching technology</b><span>HTML/CSS onward · university instructor at UKSW - computer graphics, software, training design with new technologies</span></div>
+    </div>
+    <p class="cert-note rv">Full list with verification links on <a href="https://www.linkedin.com/in/kinga-rapacka-29315a2a3">LinkedIn</a> and <a href="https://github.com/KinRap">GitHub</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="tw rv">
+      <div>
+        <h3>Also an expert technical writer - not just an AI builder.</h3>
+        <p>DITA, MadCap Flare, structured authoring, prompt design for documentation workflows. The same precision that makes AI systems reliable makes documentation excellent.</p>
+      </div>
+      <a class="btn" href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow rv" style="justify-content:center">Contact</span>
+    <h2 class="rv rv-d1">Let's talk if you're building <span class="accent-m wave" id="waveText">something real.</span></h2>
+    <p class="lead rv rv-d2">Open to mid-level AI roles - AI Solutions Specialist, AI Business Analyst, AI Implementation Consultant. Silesia · Kraków · Warsaw · Remote.</p>
+    <div class="contact-row rv rv-d3">
+      <a class="btn btn-primary" href="mailto:kinga.klosek@gmail.com">✉ kinga.klosek@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kinga-rapacka-29315a2a3">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/KinRap">GitHub</a>
+      <a class="btn btn-ghost" href="assets/Kinga_Rapacka_CV.pdf">Download CV</a>
     </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Kinga Rapacka · AI Solutions Specialist ·
-  <a href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio</a> ·
-  <a href="about.html">About</a> ·
-  <a href="https://github.com/KinRap">GitHub</a>
+  <div class="wrap">© 2026 Kinga Rapacka · AI Solutions Specialist · <a href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio</a> · <a href="about.html">About</a> · <a href="https://github.com/KinRap">GitHub</a></div>
 </footer>
 
 <script>
-  // ── Scroll progress bar ──────────────────────────────────────────────────
-  const progressBar = document.getElementById('progress-bar');
-  const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    if (progressBar && max > 0) progressBar.style.width = (window.scrollY / max * 100) + '%';
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── Scroll reveal (with stagger support) ────────────────────────────────
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const delay = +(e.target.dataset.delay || 0);
-        setTimeout(() => e.target.classList.add('visible'), delay);
-        observer.unobserve(e.target);
+  /* nav */
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var burger=document.getElementById('burger'),links=document.getElementById('navLinks');
+  burger.addEventListener('click',function(){
+    var open=links.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    burger.setAttribute('aria-expanded',open);
+  });
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.classList.remove('open');}});
+
+  /* scroll reveal */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.rv,.skill').forEach(function(el){io.observe(el)});
+
+  /* counters */
+  function animateCount(el){
+    var to=+el.dataset.to,start=null,dur=1400;
+    if(reduce){el.textContent=to;return;}
+    function step(t){
+      if(!start)start=t;
+      var p=Math.min((t-start)/dur,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var cio=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){animateCount(e.target);cio.unobserve(e.target);}});
+  },{threshold:.6});
+  document.querySelectorAll('.count').forEach(function(el){cio.observe(el)});
+
+  /* hero pipeline packet */
+  var path=document.getElementById('pipePath'),packet=document.getElementById('packet'),
+      nodes=document.querySelectorAll('#nodes .node circle'),log=document.getElementById('pipeLog');
+  var msgs=[
+    '→ <b>DQA</b> · trust report: recall 0.79 · precision 1.00',
+    '→ <b>ANA</b> · decomposing: "why is MRR growth slowing?"',
+    '→ <b>SQG</b> · generating read-only SQL',
+    '→ <b>VAL</b> · repair loop: query validated ✓',
+    '→ <b>INT</b> · pattern detected: churn in mid-tier plans',
+    '→ <b>ADV</b> · diagnosis delivered · confidence 0.86'
+  ];
+  if(path&&packet){
+    var L=path.getTotalLength(),t0=performance.now(),DUR=9000,lastIdx=-1;
+    /* node positions along path (fractions) */
+    var stops=[0,.21,.38,.55,.72,1];
+    function frame(now){
+      var p=((now-t0)%DUR)/DUR;
+      var pt=path.getPointAtLength(p*L);
+      packet.setAttribute('cx',pt.x);packet.setAttribute('cy',pt.y);
+      var idx=0;
+      for(var i=0;i<stops.length;i++){if(p>=stops[i]-0.02)idx=i;}
+      if(idx!==lastIdx){
+        lastIdx=idx;
+        nodes.forEach(function(c,j){
+          c.setAttribute('stroke',j===idx?'#2DD4BF':(j===5?'#E4B363':'#14B8A6'));
+          c.setAttribute('stroke-width',j===idx?'3.5':'2');
+        });
+        if(log)log.innerHTML=msgs[idx];
       }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      requestAnimationFrame(frame);
+    }
+    if(reduce){
+      var pt=path.getPointAtLength(L);packet.setAttribute('cx',pt.x);packet.setAttribute('cy',pt.y);
+    }else{
+      requestAnimationFrame(frame);
+    }
+  }
 
-  // Staggered reveal for skill cards
-  document.querySelectorAll('.skill-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    el.dataset.delay = i * 75;
-    observer.observe(el);
-  });
+  /* ---------- ambient agent mesh ---------- */
+  var canvas=document.getElementById('heroMesh');
+  if(canvas){
+    var ctx=canvas.getContext('2d'),hero=canvas.parentElement,
+        DPR=Math.min(window.devicePixelRatio||1,2),
+        W=0,H=0,mNodes=[],pulses=[],raf=null,visible=true,linkDist=170;
 
-  // Staggered reveal for cert cards
-  document.querySelectorAll('.cert-card').forEach((el, i) => {
-    el.classList.add('reveal');
-    el.dataset.delay = i * 45;
-    observer.observe(el);
-  });
+    function resize(){
+      W=hero.offsetWidth;H=hero.offsetHeight;
+      canvas.width=W*DPR;canvas.height=H*DPR;
+      canvas.style.width=W+'px';canvas.style.height=H+'px';
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      var count=Math.round(Math.min(34,Math.max(16,W/44)));
+      mNodes=[];
+      for(var i=0;i<count;i++){
+        mNodes.push({x:Math.random()*W,y:Math.random()*H,
+          vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,
+          r:Math.random()*1.6+1.1});
+      }
+    }
 
-  // ── Neural network canvas (hero) ─────────────────────────────────────────
-  const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let W, H, nodes = [];
+    function spawnPulse(){
+      /* pick two mNodes currently linked, send a spark along the edge */
+      var a=mNodes[(Math.random()*mNodes.length)|0];
+      var near=[];
+      for(var i=0;i<mNodes.length;i++){
+        var b=mNodes[i];if(b===a)continue;
+        var dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
+        if(d<linkDist*linkDist)near.push(b);
+      }
+      if(near.length){
+        pulses.push({a:a,b:near[(Math.random()*near.length)|0],t:0,
+          sp:.010+Math.random()*.012});
+      }
+    }
 
-    const resize = () => {
-      W = canvas.width = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
-    };
-
-    const makeNodes = () => {
-      nodes = Array.from({ length: 62 }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.6 + 0.4,
-      }));
-    };
-
-    const tick = () => {
-      ctx.clearRect(0, 0, W, H);
-      const DIST = 145;
-
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < DIST) {
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(124,106,247,${(1 - d / DIST) * 0.22})`;
-            ctx.lineWidth = 0.55;
-            ctx.stroke();
+    var lastSpawn=0;
+    function draw(now){
+      ctx.clearRect(0,0,W,H);
+      var i,j,a,b,dx,dy,dist;
+      /* edges */
+      for(i=0;i<mNodes.length;i++){
+        a=mNodes[i];
+        a.x+=a.vx;a.y+=a.vy;
+        if(a.x<0||a.x>W)a.vx*=-1;
+        if(a.y<0||a.y>H)a.vy*=-1;
+        for(j=i+1;j<mNodes.length;j++){
+          b=mNodes[j];dx=a.x-b.x;dy=a.y-b.y;dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<linkDist){
+            var o=(1-dist/linkDist)*.28;
+            ctx.strokeStyle='rgba(45,212,191,'+o.toFixed(3)+')';
+            ctx.lineWidth=1;
+            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
           }
         }
       }
+      /* mNodes */
+      for(i=0;i<mNodes.length;i++){
+        a=mNodes[i];
+        ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,6.283);
+        ctx.fillStyle='rgba(15,118,110,.9)';ctx.fill();
+        ctx.beginPath();ctx.arc(a.x,a.y,a.r+2.4,0,6.283);
+        ctx.strokeStyle='rgba(45,212,191,.22)';ctx.lineWidth=1;ctx.stroke();
+      }
+      /* pulses travelling along edges */
+      for(i=pulses.length-1;i>=0;i--){
+        var p=pulses[i];p.t+=p.sp;
+        if(p.t>=1){pulses.splice(i,1);continue;}
+        var px=p.a.x+(p.b.x-p.a.x)*p.t,py=p.a.y+(p.b.y-p.a.y)*p.t;
+        var glow=Math.sin(p.t*Math.PI);
+        ctx.beginPath();ctx.arc(px,py,2.6,0,6.283);
+        ctx.fillStyle='rgba(228,179,99,'+(0.9*glow).toFixed(3)+')';ctx.fill();
+      }
+      if(!lastSpawn||now-lastSpawn>620){
+        if(pulses.length<6)spawnPulse();
+        lastSpawn=now;
+      }
+      raf=requestAnimationFrame(draw);
+    }
 
-      nodes.forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(124,106,247,0.55)';
-        ctx.fill();
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
-      });
+    function start(){if(!raf&&visible&&!reduce)raf=requestAnimationFrame(draw);}
+    function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
 
-      requestAnimationFrame(tick);
-    };
-
-    window.addEventListener('resize', () => { resize(); makeNodes(); }, { passive: true });
-    resize(); makeNodes(); tick();
+    resize();
+    if(reduce){
+      /* one static frame */
+      draw(0);stop();
+    }else{
+      start();
+    }
+    addEventListener('resize',function(){resize();},{passive:true});
+    /* pause when hero scrolls out of view */
+    var vio=new IntersectionObserver(function(es){
+      visible=es[0].isIntersecting;
+      if(visible)start();else stop();
+    },{threshold:0});
+    vio.observe(hero);
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden)stop();else start();
+    });
   }
 
-  // ── Count-up stats ───────────────────────────────────────────────────────
-  document.querySelectorAll('.stat-num[data-count]').forEach(el => {
-    const target = parseInt(el.dataset.count, 10);
-    const display = el.dataset.display || String(target);
-    const obs = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      obs.disconnect();
-      const t0 = performance.now();
-      const run = (now) => {
-        const p = Math.min((now - t0) / 1300, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased);
-        if (p < 1) requestAnimationFrame(run);
-        else el.textContent = display;
-      };
-      requestAnimationFrame(run);
-    }, { threshold: 0.6 });
-    obs.observe(el);
-  });
+  /* ---------- flagship mini-pipeline signal ---------- */
+  (function(){
+    var pipes=document.querySelectorAll('.mini-pipe');
+    pipes.forEach(function(pipe){
+      var pNodes=pipe.querySelectorAll('.mini-node'),
+          pArrows=pipe.querySelectorAll('.mini-arrow'),
+          idx=0,timer=null;
+      function tick(){
+        pNodes.forEach(function(n,i){n.classList.toggle('lit',i===idx);});
+        pArrows.forEach(function(a,i){a.classList.toggle('lit',i===idx-1);});
+        idx=(idx+1)%(pNodes.length+1);/* extra step = brief gap before restart */
+      }
+      function run(){if(!timer&&!reduce){tick();timer=setInterval(tick,560);}}
+      function halt(){if(timer){clearInterval(timer);timer=null;}
+        pNodes.forEach(function(n){n.classList.remove('lit');});
+        pArrows.forEach(function(a){a.classList.remove('lit');});}
+      if(reduce)return;/* stay static */
+      var pio=new IntersectionObserver(function(es){
+        if(es[0].isIntersecting)run();else halt();
+      },{threshold:.4});
+      pio.observe(pipe);
+    });
+  })();
 
-  // ── Pipeline step cycle ──────────────────────────────────────────────────
-  document.querySelectorAll('.pipeline').forEach(pipeline => {
-    const boxes = pipeline.querySelectorAll('.pl-box');
-    if (!boxes.length) return;
-    let idx = 0;
-    const cycle = () => {
-      boxes.forEach((b, i) => b.classList.toggle('active', i === idx));
-      idx = (idx + 1) % boxes.length;
-    };
-    cycle();
-    setInterval(cycle, 1600);
-  });
+  /* ---------- contact letter wave ---------- */
+  (function(){
+    var el=document.getElementById('waveText');
+    if(!el)return;
+    var txt=el.textContent,frag=document.createDocumentFragment(),n=0;
+    for(var i=0;i<txt.length;i++){
+      var ch=txt[i];
+      if(ch===' '){frag.appendChild(document.createTextNode(' '));continue;}
+      var s=document.createElement('span');
+      s.textContent=ch;
+      s.style.setProperty('--i',n++);
+      frag.appendChild(s);
+    }
+    el.textContent='';el.appendChild(frag);
+  })();
+})();
 </script>
 </body>
 </html>
