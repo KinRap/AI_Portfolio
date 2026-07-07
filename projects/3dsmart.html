@@ -1,185 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="3DSmart AI Orchestrator - 5-agent system for automated tender analysis. Built by Kinga Rapacka.">
-  <title>3DSmart AI Orchestrator - Kinga Rapacka</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/project.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DSmart AI Orchestrator - Kinga Rapacka</title>
+<meta name="description" content="3DSmart - a 5-agent orchestration system that automates renewable-energy tender analysis, delivering a GO / CONDITIONAL / NO-GO report in under 6 minutes. By Kinga Rapacka.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kinga Rapacka - AI Solutions Specialist">
+<meta property="og:title" content="3DSmart AI Orchestrator - Kinga Rapacka">
+<meta property="og:description" content="A 5-agent orchestration system that automates renewable-energy tender analysis, delivering a GO / CONDITIONAL / NO-GO report in under 6 minutes.">
+<meta property="og:url" content="https://kinrap.github.io/AI_Portfolio/projects/3dsmart.html">
+<meta property="og:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3DSmart AI Orchestrator - Kinga Rapacka">
+<meta name="twitter:description" content="A 5-agent orchestration system that automates renewable-energy tender analysis, delivering a GO / CONDITIONAL / NO-GO report in under 6 minutes.">
+<meta name="twitter:image" content="https://kinrap.github.io/AI_Portfolio/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">KINGA<em>◆</em>RAPACKA</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#systems">Systems</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#skills">Skills</a></li>
+      <li><a href="../index.html#certs">Credentials</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a class="nav-cta" href="../index.html#contact">Let's talk</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <nav class="nav" role="navigation">
-    <div class="nav-inner">
-      <a href="../index.html" class="nav-logo">Kinga <span>Rapacka</span></a>
-      <ul class="nav-links">
-        <li><a href="../index.html#projects">Projects</a></li>
-        <li><a href="../index.html#skills">Skills</a></li>
-        <li><a href="../index.html#certifications">Certifications</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
-      </ul>
-      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<header class="proj-hero">
+  <div class="wrap">
+    <a class="back-link" href="../index.html#projects">← All projects</a>
+    <span class="proj-eyebrow">AI System · Python · 2025-present</span>
+    <h1>3DSmart AI Orchestrator</h1>
+    <p class="proj-sub">A 5-agent orchestration system that automates tender analysis in the renewable-energy sector. Cuts analysis time from hours to under 6 minutes, and delivers a GO / CONDITIONAL / NO-GO executive recommendation.</p>
+    <div class="proj-hero-tags">
+      <span class="tag">Python</span><span class="tag">Gemini 2.5 Pro</span><span class="tag">Multi-agent architecture</span><span class="tag">JSON interface contracts</span><span class="tag">Google Colab</span><span class="tag">ipywidgets</span>
     </div>
-  </nav>
+    <a class="btn btn-primary" href="https://github.com/KinRap/3DSmart">View on GitHub →</a>
+  </div>
+</header>
 
-  <!-- Project hero -->
-  <header class="proj-hero">
-    <div class="proj-hero-inner wrap">
-      <a href="../index.html#projects" class="proj-back">← All projects</a>
-      <div class="proj-meta">
-        <span class="eyebrow light">AI Project · Python · 2025-present</span>
-      </div>
-      <h1 class="display" style="color:#fff; margin-top:12px; margin-bottom:20px;">
-        3DSmart AI<br><em>Orchestrator</em>
-      </h1>
-      <p class="proj-hero-sub">
-        A 5-agent orchestration system that automates tender analysis in the renewable energy sector. Cuts analysis time from hours to under 6 minutes. Delivers a GO / CONDITIONAL / NO-GO executive recommendation.
-      </p>
-      <div class="proj-hero-tags">
-        <span class="hero-tag">Python</span>
-        <span class="hero-tag">Gemini 2.5 Pro</span>
-        <span class="hero-tag">Multi-agent architecture</span>
-        <span class="hero-tag">JSON interface contracts</span>
-        <span class="hero-tag">Google Colab</span>
-        <span class="hero-tag">ipywidgets</span>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;">
-        <a href="https://colab.research.google.com/drive/1q8c1EPH_uRCiGtnpUp2pq_kkeiVtd-7h#scrollTo=r7tPtZkbXqXY" target="_blank" rel="noopener" class="btn btn-primary">View on Colab →</a>
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow rv">The problem</span>
+    <h3 class="block rv rv-d1" style="margin-top:16px">Tender analysis is slow, expensive, and error-prone</h3>
+    <div class="prose rv rv-d2" style="margin-top:18px">
+      <p>A single procurement dossier in renewable energy can run to hundreds of pages: notices, contract drafts, technical specifications, bill of quantities, opening information. A human expert needs 3-8 hours per tender to check compliance, flag risks, and produce a recommendation. Miss a penalty clause or a conflicting deadline and the consequences are contractual.</p>
+      <p>3DSmart needed this process automated - <b>structured, auditable, fast, and accurate enough for management to act on.</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow rv">Architecture</span>
+    <h3 class="block rv rv-d1" style="margin-top:16px">Five-agent pipeline</h3>
+    <p class="block-sub rv rv-d2">Each agent has a single responsibility, a defined personality, operating rules, and a structured JSON output that becomes the next agent's input. The inter-agent contracts are enforced at runtime - no agent proceeds without a complete upstream output.</p>
+    <div class="agent-flow">
+      <article class="agent-step rv"><div class="agent-num">1</div><div><h4>DNPA - Data Normalisation &amp; Preparation<span class="temp">temp 0.0</span></h4><p>Converts raw PDF/DOCX tender documents into structured, unambiguous JSON. Identifies conflicts, marks missing data, standardises formats. Precision only, no interpretation.</p><span class="agent-out">→ normalised JSON + conflict log</span></div></article>
+      <article class="agent-step rv"><div class="agent-num">2</div><div><h4>FEA - Fact Extraction Agent</h4><p>Extracts 14 mandatory fact categories - submission deadlines, penalties, warranties, insurance requirements, evaluation criteria and more. Every fact carries a source tag. More than 4 NO_DATA and the pipeline halts with INPUT_INCOMPLETE.</p><span class="agent-out">→ 14-category JSON with source tags</span></div></article>
+      <article class="agent-step rv"><div class="agent-num">3</div><div><h4>CRAA - Compliance &amp; Risk Audit</h4><p>Zero-compromise auditor. Scores 14 categories against red-flag thresholds. CRITICAL flags cost -20 pts each; a score below 50 forces NO-GO. Generates questions to the contracting authority and mitigation actions.</p><span class="agent-out">→ compliance table, scoring, red flags, recommendation</span></div></article>
+      <article class="agent-step rv"><div class="agent-num">4</div><div><h4>TSFA - Technical Scope &amp; Feasibility</h4><p>Senior site-manager persona. Estimates execution time, identifies hidden costs, classifies scope (STANDARD / EXTENDED / COMPLEX), evaluates grid-connection requirements. Uses Code Interpreter for calculations.</p><span class="agent-out">→ scope classification, schedule risk, hidden-cost estimates</span></div></article>
+      <article class="agent-step rv"><div class="agent-num">5</div><div><h4>SOA - Strategic Orchestration Agent<span class="temp">temp 0.3</span></h4><p>Merges CRAA + TSFA outputs. Checks consistency across all upstream agents. Produces the 6-section Executive Insight Report: tender data → formal scoring → technical assessment → final recommendation → strategy → questions to authority.</p><span class="agent-out">→ GO / CONDITIONAL / NO-GO · Executive Report (PDF)</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section metrics">
+  <div class="wrap">
+    <span class="eyebrow rv">Results</span>
+    <h3 class="block rv rv-d1" style="margin-top:16px">Hours to minutes</h3>
+    <div class="metric-grid rv rv-d1">
+      <div class="metric"><b>&lt;6<span class="u"> min</span></b><span>end-to-end pipeline</span></div>
+      <div class="metric"><b>~95<span class="u">%</span></b><span>accuracy vs expert review</span></div>
+      <div class="metric"><b>14</b><span>mandatory JSON keys enforced</span></div>
+      <div class="metric"><b>5</b><span>specialised AI agents</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow rv">Under the hood</span>
+    <h3 class="block rv rv-d1" style="margin-top:16px">Key technical decisions</h3>
+    <div class="decisions">
+      <article class="decision rv"><h4>Why 5 agents instead of 1?</h4><p>Each agent operates within its own context, has a defined temperature (0.0 for normalisation, 0.3 for strategy), and enforces its own output contract. A single monolithic prompt cannot hold 14 JSON keys, compliance scoring, feasibility analysis, and executive synthesis at once without degrading accuracy.</p></article>
+      <article class="decision rv rv-d1"><h4>JSON interface contracts</h4><p>The 14-key FEA→CRAA contract is enforced at runtime. CRAA validates input completeness before proceeding. This makes the pipeline auditable - every fact carries a source tag referencing the exact document, section, and page it came from.</p></article>
+      <article class="decision rv"><h4>Security from the start</h4><p>userdata.get('API_KEY') instead of hardcoding. Client data anonymised before publication. Retry logic with max_retries = 3 and exponential backoff on API calls.</p></article>
+      <article class="decision rv rv-d1"><h4>Auditable by construction</h4><p>No agent proceeds without a complete upstream output, and every downstream claim traces back to a tagged source. The report a manager reads is backed by a chain that can be inspected line by line.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta rv">
+      <h2>What's next</h2>
+      <p>Markdown rendering inside the generated PDF report, Power BI dashboard integration for multi-tender comparison, and automatic BZP document retrieval are on the roadmap. Built, tested, and documented end-to-end.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/KinRap/3DSmart">View code on GitHub →</a>
+        <a class="btn btn-ghost" href="../index.html#projects">All projects</a>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Main content -->
-  <main class="proj-body">
-    <div class="wrap proj-wrap">
+<footer>
+  <div class="wrap">© 2026 Kinga Rapacka · AI Solutions Specialist · <a href="../index.html">Home</a> · <a href="https://kinrap.github.io/TW_Portfolio/">TW Portfolio</a> · <a href="https://github.com/KinRap">GitHub</a></div>
+</footer>
 
-      <!-- Problem -->
-      <section class="proj-section reveal">
-        <h2>The problem</h2>
-        <p>Tender analysis in the renewable energy sector is slow, expensive, and error-prone. A single procurement dossier can run to hundreds of pages: notices, contract drafts, technical specifications, bill of quantities, opening information. A human expert needs 3-8 hours per tender to check compliance, flag risks, and produce a recommendation. Miss a penalty clause or a conflicting deadline and the consequences are contractual.</p>
-        <p>3DSmart needed this process automated - structured, auditable, fast, and accurate enough for management to act on.</p>
-      </section>
-
-      <!-- Pipeline diagram -->
-      <section class="proj-section reveal">
-        <h2>Architecture - 5-agent pipeline</h2>
-        <p>Each agent has a single responsibility, a defined personality, operating rules, and a structured JSON output that becomes the next agent's input. The inter-agent contracts are enforced at runtime - no agent proceeds without a complete upstream output.</p>
-
-        <div class="pipeline-diagram">
-          <div class="pd-step">
-            <div class="pd-num">1</div>
-            <div class="pd-content">
-              <div class="pd-title">DNPA - Data Normalisation &amp; Preparation</div>
-              <div class="pd-desc">Converts raw PDF/DOCX tender documents into structured, unambiguous JSON. Identifies conflicts, marks missing data, standardises formats. Temperature: 0.0 - precision only, no interpretation.</div>
-              <div class="pd-output">Output: normalised JSON + conflict log</div>
-            </div>
-          </div>
-          <div class="pd-arrow">↓</div>
-          <div class="pd-step">
-            <div class="pd-num">2</div>
-            <div class="pd-content">
-              <div class="pd-title">FEA - Fact Extraction Agent</div>
-              <div class="pd-desc">Extracts 14 mandatory fact categories (submission deadlines, penalties, warranties, insurance requirements, evaluation criteria…). Every fact carries a source tag. More than 4 NO_DATA → pipeline halts with INPUT_INCOMPLETE.</div>
-              <div class="pd-output">Output: 14-category JSON with source tags</div>
-            </div>
-          </div>
-          <div class="pd-arrow">↓ &nbsp; parallel ↓</div>
-          <div class="pd-parallel">
-            <div class="pd-step">
-              <div class="pd-num">3</div>
-              <div class="pd-content">
-                <div class="pd-title">CRAA - Compliance &amp; Risk Audit</div>
-                <div class="pd-desc">Zero-compromise auditor. Scores 14 categories against red flag thresholds. CRITICAL flags cost −20 pts each. Score &lt; 50 → NO-GO. Generates questions to the contracting authority and mitigation actions.</div>
-                <div class="pd-output">Output: compliance table, scoring, red flags, CRAA recommendation</div>
-              </div>
-            </div>
-            <div class="pd-step">
-              <div class="pd-num">4</div>
-              <div class="pd-content">
-                <div class="pd-title">TSFA - Technical Scope &amp; Feasibility</div>
-                <div class="pd-desc">Senior site manager persona. Estimates execution time, identifies hidden costs, classifies scope (STANDARD / EXTENDED / COMPLEX), evaluates grid-connection requirements. Uses Code Interpreter for calculations.</div>
-                <div class="pd-output">Output: scope classification, schedule risk, hidden cost estimates</div>
-              </div>
-            </div>
-          </div>
-          <div class="pd-arrow">↓</div>
-          <div class="pd-step pd-final">
-            <div class="pd-num">5</div>
-            <div class="pd-content">
-              <div class="pd-title">SOA - Strategic Orchestration Agent</div>
-              <div class="pd-desc">Merges CRAA + TSFA outputs. Checks consistency across all upstream agents. Produces the 6-section Executive Insight Report: tender data → formal scoring → technical assessment → final recommendation → strategy → questions to authority.</div>
-              <div class="pd-output">Output: GO / CONDITIONAL / NO-GO · Executive Insight Report (PDF)</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Results -->
-      <section class="proj-section reveal">
-        <h2>Results</h2>
-        <div class="proj-results">
-          <div class="proj-result">
-            <div class="proj-result-n">&lt;6 min</div>
-            <div class="proj-result-l">end-to-end pipeline</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-result-n">~95%</div>
-            <div class="proj-result-l">accuracy vs expert review</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-result-n">14</div>
-            <div class="proj-result-l">mandatory JSON keys enforced</div>
-          </div>
-          <div class="proj-result">
-            <div class="proj-result-n">5</div>
-            <div class="proj-result-l">specialised AI agents</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Technical decisions -->
-      <section class="proj-section reveal">
-        <h2>Key technical decisions</h2>
-        <div class="proj-decisions">
-          <div class="proj-decision">
-            <div class="proj-decision-title">Why 5 agents instead of 1?</div>
-            <p>Each agent operates within its own context, has a defined temperature (0.0 for normalisation, 0.3 for strategy), and enforces its own output contract. A single monolithic prompt cannot hold 14 JSON keys, compliance scoring logic, technical feasibility analysis, and executive synthesis simultaneously without degrading accuracy.</p>
-          </div>
-          <div class="proj-decision">
-            <div class="proj-decision-title">JSON interface contracts</div>
-            <p>The 14-key FEA→CRAA contract is enforced at runtime. CRAA validates input completeness before proceeding. This makes the pipeline auditable - every fact carries a source tag referencing the exact document, section, and page number it came from.</p>
-          </div>
-          <div class="proj-decision">
-            <div class="proj-decision-title">Security from the start</div>
-            <p><code>userdata.get('API_KEY')</code> instead of hardcoding. Client data anonymised before publication. Retry logic with <code>max_retries = 3</code> and exponential backoff on API calls.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- What's next -->
-      <section class="proj-section reveal">
-        <h2>What's next</h2>
-        <p>The pipeline is built, tested, and documented end-to-end. Next steps: Markdown rendering inside the generated PDF report, Power BI dashboard integration for multi-tender comparison, and automatic BZP document retrieval are in the roadmap.</p>
-        <a href="https://colab.research.google.com/drive/1q8c1EPH_uRCiGtnpUp2pq_kkeiVtd-7h#scrollTo=r7tPtZkbXqXY" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:16px; display:inline-flex;">View code on Colab →</a>
-      </section>
-
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2026 Kinga Rapacka ·
-      <a href="../index.html">Portfolio</a> ·
-      <a href="https://github.com/KinRap" target="_blank" rel="noopener">GitHub</a>
-    </p>
-  </footer>
-
-  <script src="../js/main.js"></script>
+<script src="../projects.js"></script>
 </body>
 </html>
