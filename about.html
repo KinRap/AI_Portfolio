@@ -40,6 +40,7 @@
 </nav>
 
 <header class="hero" id="top">
+  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -153,10 +154,14 @@
     <h2 class="rv rv-d1">How the threads came together</h2>
     <p class="lead rv rv-d2">Not a straight line - a deliberate convergence.</p>
     <div class="cert-list">
+      <div class="cert rv"><span class="cert-year">since 2008</span><b>Writing code</b><span>HTML, CSS and onward - from my journalism studies onward.</span></div>
       <div class="cert rv"><span class="cert-year">MA · MA</span><b>Two master's - Theology (Biblical Studies) &amp; Media Education and Journalism</b><span>Cardinal Stefan Wyszyński University (UKSW) - working with complex source material, media and audiences.</span></div>
       <div class="cert rv"><span class="cert-year">PhD</span><b>Doctorate</b><span>Cardinal Stefan Wyszyński University, Warsaw - research methodology, structured argumentation, evidence-based method.</span></div>
-      <div class="cert rv"><span class="cert-year">since 2008</span><b>Writing code &amp; teaching technology</b><span>HTML, CSS and onward since 2008. University instructor at UKSW - computer graphics, software, text editing, and training design with new technologies.</span></div>
+      <div class="cert rv"><span class="cert-year">since 2010</span><b>University instructor - UKSW</b><span>Computer graphics, software, text editing, and designing training programmes with new technologies.</span></div>
       <div class="cert rv"><span class="cert-year">2023-2024</span><b>Postgraduate - Technical Communication</b><span>Structured authoring, DITA, prompt design for documentation - where AI first caught me.</span></div>
+      <div class="cert rv"><span class="cert-year">2024-2026</span><b>Intensive AI/ML reskilling · 155h+</b><span>Founderz × Microsoft, EIT Deep Tech, Google × SGH, Santander Open Academy (MIT / IE), DeepLearning.AI - generative AI, agents, data science.</span></div>
+      <div class="cert rv"><span class="cert-year">2025-2026</span><b>Two live multi-agent systems</b><span>TaskFlow (6-agent measured analytics) and 3DSmart (5-agent tender analysis) - built, measured, running.</span></div>
+      <div class="cert rv"><span class="cert-year">July 2026</span><b>Postgraduate - Mathematics &amp; Computer Science</b><span>WSKZ - formalising the foundations under the practical work.</span></div>
       <div class="cert rv"><span class="cert-year">2024-2026</span><b>Intensive AI/ML reskilling · 155h+</b><span>Founderz × Microsoft, EIT Deep Tech, Google × SGH, Santander Open Academy (MIT / IE), DeepLearning.AI - generative AI, agents, data science.</span></div>
       <div class="cert rv"><span class="cert-year">2025-2026</span><b>Two live multi-agent systems</b><span>TaskFlow (6-agent measured analytics) and 3DSmart (5-agent tender analysis) - built, measured, running.</span></div>
       <div class="cert rv"><span class="cert-year">July 2026</span><b>Postgraduate - Mathematics &amp; Computer Science</b><span>WSKZ - formalising the foundations under the practical work.</span></div>
@@ -234,6 +239,76 @@
   var hero=document.getElementById('top');
   if(hero){var cio=new IntersectionObserver(function(es){cvisible=es[0].isIntersecting;if(cvisible)cstart();else cstop();},{threshold:0});cio.observe(hero);}
   document.addEventListener('visibilitychange',function(){if(document.hidden)cstop();else cstart();});
+})();
+
+/* ---------- ambient agent mesh (own scope) ---------- */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas=document.getElementById('heroMesh');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d'),hero=canvas.parentElement,
+      DPR=Math.min(window.devicePixelRatio||1,2),
+      W=0,H=0,mNodes=[],pulses=[],raf=null,visible=true,linkDist=170;
+  function resize(){
+    W=hero.offsetWidth;H=hero.offsetHeight;
+    canvas.width=W*DPR;canvas.height=H*DPR;
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    var count=Math.round(Math.min(34,Math.max(16,W/44)));
+    mNodes=[];
+    for(var i=0;i<count;i++){
+      mNodes.push({x:Math.random()*W,y:Math.random()*H,
+        vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.6+1.1});
+    }
+  }
+  function spawnPulse(){
+    var a=mNodes[(Math.random()*mNodes.length)|0],near=[];
+    for(var i=0;i<mNodes.length;i++){
+      var b=mNodes[i];if(b===a)continue;
+      var dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
+      if(d<linkDist*linkDist)near.push(b);
+    }
+    if(near.length)pulses.push({a:a,b:near[(Math.random()*near.length)|0],t:0,sp:.010+Math.random()*.012});
+  }
+  var lastSpawn=0;
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+    var i,j,a,b,dx,dy,dist;
+    for(i=0;i<mNodes.length;i++){
+      a=mNodes[i];a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;
+      if(a.y<0||a.y>H)a.vy*=-1;
+      for(j=i+1;j<mNodes.length;j++){
+        b=mNodes[j];dx=a.x-b.x;dy=a.y-b.y;dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<linkDist){
+          var o=(1-dist/linkDist)*.28;
+          ctx.strokeStyle='rgba(45,212,191,'+o.toFixed(3)+')';ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
+    for(i=0;i<mNodes.length;i++){
+      a=mNodes[i];
+      ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,6.283);ctx.fillStyle='rgba(15,118,110,.9)';ctx.fill();
+      ctx.beginPath();ctx.arc(a.x,a.y,a.r+2.4,0,6.283);ctx.strokeStyle='rgba(45,212,191,.22)';ctx.lineWidth=1;ctx.stroke();
+    }
+    for(i=pulses.length-1;i>=0;i--){
+      var p=pulses[i];p.t+=p.sp;
+      if(p.t>=1){pulses.splice(i,1);continue;}
+      var px=p.a.x+(p.b.x-p.a.x)*p.t,py=p.a.y+(p.b.y-p.a.y)*p.t,glow=Math.sin(p.t*Math.PI);
+      ctx.beginPath();ctx.arc(px,py,2.6,0,6.283);ctx.fillStyle='rgba(228,179,99,'+(0.9*glow).toFixed(3)+')';ctx.fill();
+    }
+    if(!lastSpawn||now-lastSpawn>620){if(pulses.length<6)spawnPulse();lastSpawn=now;}
+    raf=requestAnimationFrame(draw);
+  }
+  function start(){if(!raf&&visible&&!reduce)raf=requestAnimationFrame(draw);}
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  resize();
+  if(reduce){draw(0);stop();}else{start();}
+  addEventListener('resize',function(){resize();},{passive:true});
+  var vio=new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)start();else stop();},{threshold:0});
+  vio.observe(hero);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else start();});
 })();
 </script>
 </body>
