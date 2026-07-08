@@ -336,3 +336,8 @@ a:focus-visible,button:focus-visible,.btn:focus-visible,.nav-cta:focus-visible,.
 .story p{font-size:1.06rem;color:var(--ink-soft);line-height:1.72;margin-bottom:20px}
 .story b{color:var(--ink);font-weight:600}
 .story-close{font-family:var(--font-body);font-weight:600;font-size:1.12rem;color:var(--ultra);line-height:1.5;margin-top:4px}
+
+/* ===================== whole-card click target (stretched link) ===================== */
+.proj{position:relative}
+.sys-card .sys-link,.proj .sys-link{position:static}
+.sys-card .sys-link::after,.proj .sys-link::after{content:"";position:absolute;inset:0;z-index:3}
